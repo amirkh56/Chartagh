@@ -1,0 +1,26 @@
+import { ComingFrames } from '@/components/sections/WorkTeaser';
+import PageHead from '@/components/PageHead';
+import Cta from '@/components/sections/Cta';
+
+export const metadata = { title: 'نمونه‌کارها' };
+
+const CATS = ['همه', 'طراحی سایت', 'پوستر', 'سه‌بعدی', 'سئو'];
+
+export default function WorkPage() {
+  return (
+    <>
+      <PageHead eyebrow="نمونه‌کارها" title="ویترین چارطاق داره آماده می‌شه" lead="به‌زودی نمونه‌کارها اینجا نمایان می‌شن. داریم کاشی‌ها رو یکی‌یکی سر جاشون می‌ذاریم؛ یه کم دیگه صبر کن رفیق." />
+      <section className="container work-page">
+        <ul className="cats" aria-label="دسته‌بندی‌ها (به‌زودی)">
+          {CATS.map((c, i) => (
+            <li key={c} className={i === 0 ? 'is-on' : ''}>
+              {c}
+            </li>
+          ))}
+        </ul>
+        <ComingFrames count={6} big />
+      </section>
+      <Cta />
+    </>
+  );
+}
