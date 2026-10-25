@@ -2,24 +2,24 @@
 import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Words, EASE } from '../motion';
-import { Pattern, Shamseh } from '../Ornaments';
+import { Pattern, Toranj } from '../Ornaments';
 import { fa, starStr } from '@/lib/patterns';
 
 const STEPS = [
-  { t: 'اسکچ و ایده', d: 'اول با هم گپ می‌زنیم، بعد روی کاغذ خط‌خطی می‌کنیم. اسکلت سایتت از همین‌جا شکل می‌گیره.' },
-  { t: 'طراحی رابط', d: 'رنگ، فونت، کاشی و نقش. هر صفحه رو مثل یه کاشی معرق، با حوصله تیکه‌تیکه کنار هم می‌چینیم.' },
-  { t: 'جون دادن با انیمیشن', d: 'سایتی که نفس می‌کشه؛ هر حرکت موس یه واکنش کوچیک و دلنشین داره. اجزا از صفحه بیرون میان!' },
-  { t: 'کدنویسی تمیز', d: 'ری‌اکت و نکست‌جی‌اس؛ سریع، سبک و مرتب. کدی که فردا خودمون هم از خوندنش کیف کنیم.' },
-  { t: 'لانچ و سئو', d: 'سایتت آنلاین می‌شه، گوگل باهاش رفیق می‌شه و ما هم کنارت می‌مونیم. جشن داریم!' },
+  { t: 'طرح اولیه و ایده', d: 'ابتدا با هم گفت‌وگو می‌کنیم و سپس اسکلت سایت را روی کاغذ می‌کشیم؛ ساختار صفحه‌ها از همین‌جا شکل می‌گیرد.' },
+  { t: 'طراحی رابط کاربری', d: 'رنگ، تایپوگرافی و نقش‌مایه؛ هر صفحه را مانند یک کاشی معرق، با حوصله و تکه‌به‌تکه کنار هم می‌چینیم.' },
+  { t: 'جان‌بخشی با انیمیشن', d: 'سایتی زنده که به هر حرکت کاربر واکنشی ظریف و دلنشین نشان می‌دهد.' },
+  { t: 'کدنویسی اصولی', d: 'ری‌اکت و نکست‌جی‌اس؛ سریع، سبک و منظم، با کدی که توسعه‌ی آن در آینده آسان باشد.' },
+  { t: 'انتشار و سئو', d: 'سایت منتشر می‌شود، برای موتورهای جست‌وجو بهینه می‌شود و ما پس از تحویل نیز کنار شما می‌مانیم.' },
 ];
 
 const CODE = [
   ['k', 'export default function Hero() {'],
   ['n', ' '],
   ['p', '  return ('],
-  ['t', '    <Taq pattern="khatam">'],
-  ['t', '      <Title>سلام رفیق!</Title>'],
-  ['t', '      <Button glow>بزن بریم</Button>'],
+  ['t', '    <Taq pattern="herati">'],
+  ['t', '      <Title>خوش آمدید</Title>'],
+  ['t', '      <Button glow>شروع همکاری</Button>'],
   ['t', '    </Taq>'],
   ['p', '  );'],
   ['p', '}'],
@@ -84,8 +84,8 @@ function Mock({ stage }) {
             <b className="mk-cta" />
           </div>
           <div className="mk-art">
-            <Pattern name="khatam" className="mk-art__pat" />
-            <Shamseh className="mk-art__sun" />
+            <Pattern name="boteh" className="mk-art__pat" />
+            <Toranj className="mk-art__sun" />
           </div>
         </div>
         <div className="mk-cards">
@@ -139,7 +139,7 @@ function Mock({ stage }) {
               transition={{ duration: 0.6, ease: EASE }}
             >
               <span className="mk-live">
-                <i /> آنلاین شد!
+                <i /> منتشر شد!
               </span>
               <div className="mk-scores">
                 {SCORES.map((s) => (
@@ -171,12 +171,12 @@ export default function Showcase() {
   return (
     <section ref={ref} className="showcase" id="showcase">
       <div className="showcase__sticky">
-        <Pattern name="girih" className="showcase__pat" />
+        <Pattern name="herati" className="showcase__pat" />
         <div className="showcase__inner container">
           <div className="showcase__copy">
-            <p className="eyebrow">هنر طراحی سایت</p>
+            <p className="eyebrow">هنر طراحی سایت؛ تخصص ویژه‌ی ما</p>
             <h2 className="sec-title showcase__title">
-              <Words text="یه سایت چطوری از صفر ساخته می‌شه؟" />
+              <Words text="یک سایت چگونه از صفر ساخته می‌شود؟" />
             </h2>
             <ol className="steps">
               {STEPS.map((s, i) => (
@@ -207,7 +207,7 @@ export default function Showcase() {
 
           <div
             className="showcase__stage"
-            data-cursor="اسکرول کن"
+            data-cursor="اسکرول کنید"
             onPointerMove={(e) => {
               const r = e.currentTarget.getBoundingClientRect();
               tx.set(((e.clientX - r.left) / r.width - 0.5) * 12);

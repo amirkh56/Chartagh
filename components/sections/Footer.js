@@ -23,13 +23,13 @@ export default function Footer() {
           <div className="footer__brand">
             <Logo className="footer__logo" />
             <p>
-              چارطاق؛ آژانس خلاق طراحی سایت، پوستر، سه‌بعدی و سئو.
+              چارطاق؛ آژانس تبلیغاتی و خلاق در طراحی سایت، طراحی پوستر و سئو.
               <br />
-              پنج ساله با عشق، چای و هنر ایرانی می‌سازیم.
+              پنج سال است که با الهام از هنر ایرانی برای برندها می‌سازیم.
             </p>
           </div>
           <nav className="footer__col" aria-label="لینک‌های فوتر">
-            <h4>سر بزن</h4>
+            <h4>دسترسی سریع</h4>
             {NAV.map((n) => (
               <TransitionLink key={n.href} href={n.href}>
                 {n.label}
@@ -37,7 +37,7 @@ export default function Footer() {
             ))}
           </nav>
           <div className="footer__col">
-            <h4>پیدامون کن</h4>
+            <h4>شبکه‌های اجتماعی</h4>
             {SOCIAL.map((s) => (
               <a key={s.label} href={s.href}>
                 {s.label}
@@ -45,21 +45,21 @@ export default function Footer() {
             ))}
           </div>
           <div className="footer__col">
-            <h4>سلام برسون</h4>
+            <h4>ارتباط با ما</h4>
             <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
-            <span>هر جا که اینترنت باشه، ما هم هستیم</span>
+            <span>پاسخ‌گویی شنبه تا چهارشنبه</span>
           </div>
         </div>
 
         <div className="footer__word" aria-hidden {...spot}>
-          <Pattern name="khatam" className="footer__word-pat" />
+          <Pattern name="herati" className="footer__word-pat" />
           <span>چارطاق</span>
         </div>
 
         <div className="footer__bottom">
-          <span>© ۱۴۰۵ چارطاق — آجر به آجر، با عشق ساخته شده.</span>
+          <span>© ۱۴۰۵ چارطاق — آجر به آجر ساخته شده است.</span>
           <button className="to-top" onClick={() => lenis?.scrollTo(0, { duration: 1.6 })}>
-            برگرد بالا <Arrow className="arrow--up" />
+            بازگشت به بالا <Arrow className="arrow--up" />
           </button>
         </div>
       </div>

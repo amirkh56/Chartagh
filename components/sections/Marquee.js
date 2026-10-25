@@ -48,8 +48,8 @@ function Row({ items, speed = 2.2, className = '' }) {
 export default function Marquee() {
   return (
     <section className="marquees" aria-label="خدمات ما">
-      <Row className="marquee--brick" items={['طراحی سایت', 'طراحی پوستر', 'طراحی سه‌بعدی', 'سئو', 'برندینگ با حال', 'هنر ایرانی']} />
-      <Row className="marquee--line" speed={-1.6} items={['پنج سال تجربه', 'چای همیشه آماده‌ست', 'کاشی به کاشی', 'آجر به آجر', 'پیکسل به پیکسل']} />
+      <Row className="marquee--brick" items={['طراحی سایت', 'طراحی پوستر', 'سئو', 'طراحی رابط کاربری', 'کاور شبکه‌های اجتماعی', 'بهینه‌سازی سرعت']} />
+      <Row className="marquee--line" speed={-1.6} items={['پنج سال تجربه', 'الهام از هنر ایرانی', 'کاشی به کاشی', 'آجر به آجر', 'پیکسل به پیکسل']} />
     </section>
   );
 }

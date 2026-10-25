@@ -6,14 +6,16 @@ import { usePathname } from 'next/navigation';
 import { TransitionLink } from './Transition';
 import Logo from './Logo';
 import ThemeToggle from './ThemeToggle';
-import { Pattern, Shamseh } from './Ornaments';
+import { Pattern, Toranj, TileBand, Arrow } from './Ornaments';
+import { useLoaded } from './Loader';
 import { fa } from '@/lib/patterns';
 
 export const NAV = [
   { href: '/#services', label: 'خدمات' },
-  { href: '/#showcase', label: 'هنر طراحی سایت' },
+  { href: '/#work', label: 'نمونه‌کارها' },
+  { href: '/#showcase', label: 'طراحی سایت' },
   { href: '/#process', label: 'فرایند' },
-  { href: '/work', label: 'نمونه‌کارها' },
+  { href: '/about', label: 'درباره ما' },
   { href: '/contact', label: 'تماس' },
 ];
 
@@ -26,10 +28,11 @@ export default function Header() {
   const { scrollY } = useScroll();
   const lenis = useLenis();
   const pathname = usePathname();
+  const loaded = useLoaded();
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0;
-    setHidden(y > prev && y > 240);
+    setHidden(y > prev && y > 260);
     setScrolled(y > 24);
   });
 
@@ -54,25 +57,45 @@ export default function Header() {
     <>
       <motion.header
         className={`header ${scrolled ? 'is-scrolled' : ''}`}
-        animate={{ y: hidden && !open ? '-120%' : '0%' }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ y: '-120%' }}
+        animate={{ y: loaded && !(hidden && !open) ? '0%' : '-120%' }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="header__inner container">
-          <TransitionLink href="/" className="brand" aria-label="چارطاق، صفحه اصلی" onClick={closeMenu}>
-            <Logo className="brand__logo" />
-            <span className="brand__name">چارطاق</span>
+        <div className="header__bar container">
+          <span className="header__lachak header__lachak--r" aria-hidden />
+          <span className="header__lachak header__lachak--l" aria-hidden />
+          <TransitionLink href="/" className="brand" aria-label="چارطاق، صفحه‌ی اصلی" onClick={closeMenu}>
+            <span className="brand__mark">
+              <Logo className="brand__logo" />
+            </span>
+            <span className="brand__text">
+              <span className="brand__name">چارطاق</span>
+              <span className="brand__tag">آژانس تبلیغاتی</span>
+            </span>
           </TransitionLink>
+
           <nav className="nav" aria-label="منوی اصلی">
-            {NAV.map((n) => (
-              <TransitionLink key={n.href} href={n.href} className="nav__link">
-                {n.label}
-              </TransitionLink>
+            {NAV.map((n, i) => (
+              <motion.span
+                key={n.href}
+                className="nav__item"
+                initial={{ opacity: 0, y: -12 }}
+                animate={loaded ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.35 + i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <TransitionLink href={n.href} className={`nav__link ${pathname === n.href ? 'is-active' : ''}`}>
+                  <span className="nav__arch" aria-hidden />
+                  <span className="nav__label">{n.label}</span>
+                </TransitionLink>
+              </motion.span>
             ))}
           </nav>
+
           <div className="header__actions">
             <ThemeToggle />
             <TransitionLink href="/contact" className="btn btn--primary btn--sm header__cta">
-              <span>بزن بریم</span>
+              <span>شروع همکاری</span>
+              <Arrow />
             </TransitionLink>
             <button className={`burger ${open ? 'is-open' : ''}`} onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="menu" aria-label={open ? 'بستن منو' : 'باز کردن منو'}>
               <span />
@@ -80,6 +103,7 @@ export default function Header() {
             </button>
           </div>
         </div>
+        <TileBand className="header__band" />
       </motion.header>
 
       <AnimatePresence>
@@ -92,8 +116,8 @@ export default function Header() {
             animate={{ clipPath: 'inset(0 0 0% 0)', transition: { duration: 0.8, ease: EASE } }}
             exit={{ clipPath: 'inset(100% 0 0 0)', transition: { duration: 0.6, ease: EASE } }}
           >
-            <Pattern name="khatam" className="menu__pat" />
-            <Shamseh className="menu__shamseh" />
+            <Pattern name="herati" className="menu__pat" />
+            <Toranj className="menu__toranj" />
             <nav className="menu__nav container" aria-label="منوی موبایل">
               {NAV.map((n, i) => (
                 <motion.div
@@ -109,7 +133,7 @@ export default function Header() {
                 </motion.div>
               ))}
             </nav>
-            <p className="menu__foot container">یه چای مهمون ما؟ hello@chartagh.ir</p>
+            <p className="menu__foot container">hello@chartagh.ir</p>
           </motion.div>
         )}
       </AnimatePresence>

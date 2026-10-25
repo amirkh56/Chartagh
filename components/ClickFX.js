@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { starPoints } from '@/lib/patterns';
 
 // Click on any empty spot → a burst of little glazed tiles. Fast mouse moves leave a faint tile trail.
-const COLORS = ['#E2492D', '#B5391F', '#22B8B0', '#2C4FA0', '#F8DDD3', '#D9C5A0'];
+const COLORS = ['#E2492D', '#B5391F', '#C0704C', '#7E2414', '#F8DDD3', '#D9C5A0'];
 const STAR = starPoints(0, 0, 1);
 const SKIP = 'a,button,input,textarea,select,label,summary,[role="button"],[data-no-fx]';
 
@@ -65,7 +65,7 @@ export default function ClickFX() {
         g.lineWidth = 2;
         shape(g, 0, 12 + e * 60);
         g.stroke();
-        g.strokeStyle = '#22B8B0';
+        g.strokeStyle = '#D9C5A0';
         g.lineWidth = 1.2;
         g.beginPath();
         g.arc(0, 0, 8 + e * 85, 0, Math.PI * 2);

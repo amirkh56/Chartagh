@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Reveal, Tilt, EASE } from './motion';
-import { Arrow, Pattern, Shamseh } from './Ornaments';
+import { Arrow, Pattern, Toranj } from './Ornaments';
 
-const SERVICES = ['طراحی سایت', 'طراحی پوستر', 'طراحی سه‌بعدی', 'سئو', 'هنوز نمی‌دونم!'];
-const BUDGETS = ['کوچیک و جمع‌وجور', 'متوسط', 'بزرگ و جاه‌طلبانه'];
+const SERVICES = ['طراحی سایت', 'طراحی پوستر', 'سئو', 'هنوز مطمئن نیستم'];
+const BUDGETS = ['کوچک', 'متوسط', 'بزرگ'];
 
 function Chips({ name, options, multi, value, onChange }) {
   return (
@@ -39,7 +39,7 @@ export default function ContactForm() {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     if (!String(data.get('name')).trim() || !String(data.get('contact')).trim()) {
-      setError('اسم و یه راه ارتباطی رو بنویس که بتونیم پیدات کنیم.');
+      setError('لطفاً نام و یک راه ارتباطی را وارد کنید.');
       return;
     }
     setError('');
@@ -56,25 +56,25 @@ export default function ContactForm() {
             <motion.form key="form" className="contact__form" onSubmit={submit} noValidate exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4 }}>
               <div className="field-row">
                 <label className="field">
-                  <span>اسمت چیه؟</span>
-                  <input name="name" autoComplete="name" placeholder="مثلاً: سارا" />
+                  <span>نام شما</span>
+                  <input name="name" autoComplete="name" placeholder="نام و نام خانوادگی" />
                 </label>
                 <label className="field">
-                  <span>ایمیل یا شماره‌ت</span>
-                  <input name="contact" autoComplete="email" placeholder="که بتونیم خبرت کنیم" dir="auto" />
+                  <span>ایمیل یا شماره‌ی تماس</span>
+                  <input name="contact" autoComplete="email" placeholder="برای پاسخ‌گویی به شما" dir="auto" />
                 </label>
               </div>
               <fieldset className="field">
-                <legend>به چی احتیاج داری؟</legend>
+                <legend>به چه خدمتی نیاز دارید؟</legend>
                 <Chips name="services" options={SERVICES} multi value={services} onChange={setServices} />
               </fieldset>
               <fieldset className="field">
-                <legend>بودجه‌ت حدوداً چقدره؟</legend>
+                <legend>بودجه‌ی تقریبی پروژه</legend>
                 <Chips name="budget" options={BUDGETS} value={budget} onChange={setBudget} />
               </fieldset>
               <label className="field">
-                <span>یه کم از ایده‌ت بگو</span>
-                <textarea name="message" rows={5} placeholder="هر چی تو ذهنته؛ ما خوب گوش می‌دیم…" />
+                <span>درباره‌ی پروژه بنویسید</span>
+                <textarea name="message" rows={5} placeholder="هدف، مخاطب و هر نکته‌ای که لازم است بدانیم…" />
               </label>
               {error && (
                 <p className="form-error" role="alert">
@@ -82,17 +82,17 @@ export default function ContactForm() {
                 </p>
               )}
               <button className="btn btn--primary btn--block" disabled={state === 'sending'}>
-                <span>{state === 'sending' ? 'داره می‌ره…' : 'بفرست بره'}</span>
+                <span>{state === 'sending' ? 'در حال ارسال…' : 'ارسال پیام'}</span>
                 <Arrow />
               </button>
             </motion.form>
           ) : (
             <motion.div key="ok" className="contact__ok" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: EASE }} role="status">
-              <Shamseh className="contact__ok-sun" />
-              <h2>رسید دستمون!</h2>
-              <p>مرسی رفیق. کمتر از یه روز کاری بهت پیام می‌دیم؛ تا اون موقع چای رو دم کن.</p>
+              <Toranj className="contact__ok-sun" />
+              <h2>پیام شما دریافت شد</h2>
+              <p>سپاسگزاریم. در کمتر از یک روز کاری با شما تماس می‌گیریم.</p>
               <button className="btn btn--ghost" onClick={() => setState('idle')}>
-                <span>یه پیام دیگه</span>
+                <span>ارسال پیام دیگر</span>
               </button>
             </motion.div>
           )}
@@ -102,14 +102,14 @@ export default function ContactForm() {
       <aside className="contact__aside">
         <Reveal delay={0.1}>
           <Tilt className="info-card">
-            <Pattern name="arcade" className="info-card__pat" />
-            <h3>مستقیم بیا</h3>
+            <Pattern name="boteh" className="info-card__pat" />
+            <h3>ارتباط مستقیم</h3>
             <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
-            <p>هر جا که اینترنت باشه، ما هم هستیم.</p>
+            <p>همکاری با برندها در سراسر ایران، به‌صورت حضوری و آنلاین.</p>
             <ul>
               <li>شنبه تا چهارشنبه، ۹ صبح تا ۶ عصر</li>
-              <li>جواب پیام‌ها: کمتر از یه روز کاری</li>
-              <li>جلسه‌ی آشنایی: رایگان و بی‌تعارف</li>
+              <li>پاسخ پیام‌ها: کمتر از یک روز کاری</li>
+              <li>جلسه‌ی آشنایی: رایگان</li>
             </ul>
           </Tilt>
         </Reveal>

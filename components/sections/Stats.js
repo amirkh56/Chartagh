@@ -2,14 +2,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { animate, useInView } from 'framer-motion';
 import { Reveal } from '../motion';
-import { Pattern } from '../Ornaments';
+import { Pattern, Icon } from '../Ornaments';
 import { fa } from '@/lib/patterns';
 
 const STATS = [
-  { v: 5, suffix: '', label: 'سال تجربه', note: 'از ۱۴۰۰ تا امروز، بی‌وقفه' },
-  { v: 4, suffix: '', label: 'تخصص اصلی', note: 'سایت، پوستر، سه‌بعدی، سئو' },
-  { v: 1, suffix: '', label: 'تیم رفیق', note: 'همه با هم، از اول تا آخر' },
-  { v: null, label: 'استکان چای', note: 'و هنوز هم ادامه داره' },
+  { v: 5, icon: 'lantern', label: 'سال تجربه', note: 'از ۱۴۰۰ تاکنون' },
+  { v: 3, icon: 'boteh', label: 'تخصص اصلی', note: 'سایت، پوستر و سئو' },
+  { v: 1, icon: 'compass', label: 'تیم یکپارچه', note: 'از گفت‌وگو تا تحویل' },
+  { v: null, icon: 'tea', label: 'استکان چای', note: 'در جلسه‌های گفت‌وگو' },
 ];
 
 function Count({ to }) {
@@ -24,12 +24,13 @@ function Count({ to }) {
   return <span ref={ref}>{fa(n)}</span>;
 }
 
-export default function Stats() {
+export default function Stats({ className = '' }) {
   return (
-    <section className="stats container" aria-label="چارطاق در چند عدد">
+    <section className={`stats container ${className}`} aria-label="چارطاق در چند عدد">
       {STATS.map((s, i) => (
         <Reveal key={s.label} className="stat" delay={i * 0.1}>
-          <Pattern name="rosette" className="stat__pat" />
+          <Pattern name="khatai" className="stat__pat" />
+          <Icon name={s.icon} className="stat__icon" />
           <div className="stat__v">{s.v === null ? '∞' : <Count to={s.v} />}</div>
           <div className="stat__l">{s.label}</div>
           <div className="stat__n">{s.note}</div>

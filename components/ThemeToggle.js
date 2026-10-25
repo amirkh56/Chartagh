@@ -31,7 +31,7 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button className="theme-toggle" onClick={toggle} aria-label={night ? 'حالت روز' : 'حالت شب'} data-cursor={night ? 'روز!' : 'شب!'}>
+    <button className="theme-toggle" onClick={toggle} aria-label={night ? 'حالت روز' : 'حالت شب'} data-cursor={night ? 'حالت روز' : 'حالت شب'}>
       <motion.svg viewBox="-50 -50 100 100" animate={{ rotate: night ? 180 : 0 }} transition={{ type: 'spring', stiffness: 120, damping: 14 }}>
         <motion.polygon points={starStr(0, 0, 44, 8)} fill="var(--sun)" animate={{ scale: night ? 0 : 1 }} />
         <motion.circle r="22" fill="var(--sun-core)" animate={{ scale: night ? 0 : 1 }} />

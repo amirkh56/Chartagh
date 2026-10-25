@@ -76,10 +76,10 @@ export function TransitionProvider({ children }) {
           }
         }}
       >
-        <Pattern name="girih" className="curtain__pat" />
+        <Pattern name="boteh" className="curtain__pat" />
         <div className="curtain__center">
           <Logo className="curtain__logo" />
-          <span>چند لحظه صبر کن رفیق…</span>
+          <span>لطفاً چند لحظه صبر کنید…</span>
         </div>
       </motion.div>
     </Ctx.Provider>

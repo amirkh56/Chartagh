@@ -11,7 +11,7 @@ export default function Providers({ children }) {
   const [loaded, setLoaded] = useState(false);
   return (
     <MotionConfig reducedMotion="user">
-      <ReactLenis root options={{ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true }}>
+      <ReactLenis root options={{ lerp: 0.085, wheelMultiplier: 1, smoothWheel: true, anchors: { offset: -10 } }}>
         <LoadCtx.Provider value={{ loaded, setLoaded }}>
           <TransitionProvider>
             {children}

@@ -54,10 +54,10 @@ export default function Loader() {
       {!loaded && (
         <motion.div className="loader" key="loader" initial="show" animate="show" exit="exit" aria-live="polite" aria-label="در حال بارگذاری">
           <motion.div className="loader__door loader__door--a" variants={{ exit: { x: '101%', transition: DOOR } }}>
-            <Pattern name="khatam" className="loader__pat" />
+            <Pattern name="herati" className="loader__pat" />
           </motion.div>
           <motion.div className="loader__door loader__door--b" variants={{ exit: { x: '-101%', transition: DOOR } }}>
-            <Pattern name="khatam" className="loader__pat" />
+            <Pattern name="herati" className="loader__pat" />
           </motion.div>
           <motion.div
             className="loader__center"
@@ -74,7 +74,7 @@ export default function Loader() {
               {fa(n)}
               <small>٪</small>
             </div>
-            <p className="loader__hint">داریم کاشی‌ها رو می‌چینیم…</p>
+            <p className="loader__hint">در حال چیدن کاشی‌ها…</p>
           </motion.div>
         </motion.div>
       )}

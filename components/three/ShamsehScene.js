@@ -24,7 +24,8 @@ function Medallion({ ctl }) {
   );
   const mat = useMemo(() => {
     const glaze = (color) => new THREE.MeshPhysicalMaterial({ color, roughness: 0.22, clearcoat: 1, clearcoatRoughness: 0.12 });
-    return { brick: glaze(C.brick), kahgel: glaze(C.kahgel), firuzeh: glaze(C.firuzeh), lajvard: glaze(C.lajvard), sand: glaze(C.sand) };
+    // warm brick family, one small turquoise accent
+    return { brick: glaze(C.brick), kahgel: glaze(C.kahgel), firuzeh: glaze(C.terracotta), lajvard: glaze(C.mid), sand: glaze(C.sand), accent: glaze(C.firuzeh) };
   }, []);
 
   useFrame((state, dt) => {
@@ -54,7 +55,7 @@ function Medallion({ ctl }) {
       <group ref={rings[0]}>
         <mesh geometry={geo.big} material={mat.brick} />
         <mesh geometry={geo.mid} material={mat.kahgel} position={[0, 0, 0.12]} rotation={[0, 0, Math.PI / 8]} />
-        <mesh position={[0, 0, 0.32]} rotation={[Math.PI / 2, 0, 0]} material={mat.lajvard}>
+        <mesh position={[0, 0, 0.32]} rotation={[Math.PI / 2, 0, 0]} material={mat.accent}>
           <cylinderGeometry args={[0.22, 0.22, 0.1, 8]} />
         </mesh>
       </group>
@@ -88,10 +89,10 @@ export default function ShamsehScene({ active = true, night = false }) {
       onPointerLeave={() => (ctl.current.hover = false)}
       onClick={() => (ctl.current.bv = 5)}
     >
-      <Canvas flat dpr={[1, 1.75]} frameloop={active ? 'always' : 'never'} camera={{ position: [0, 0, 8.5], fov: 36 }} gl={{ antialias: true, alpha: true }} aria-label="شمسه‌ی سه‌بعدی؛ موس رو روش ببر و کلیک کن">
+      <Canvas flat dpr={[1, 1.75]} frameloop={active ? 'always' : 'never'} camera={{ position: [0, 0, 8.5], fov: 36 }} gl={{ antialias: true, alpha: true }} aria-label="شمسه؛ نشانگر را روی آن ببرید و کلیک کنید">
         <ambientLight intensity={night ? 0.5 : 0.9} />
         <directionalLight position={[3, 4, 6]} intensity={night ? 1.6 : 2.2} />
-        <pointLight position={[-4, -2, 4]} intensity={night ? 12 : 6} color={C.firuzeh} decay={1.5} distance={14} />
+        <pointLight position={[-4, -2, 4]} intensity={night ? 12 : 6} color={C.sand} decay={1.5} distance={14} />
         <Medallion ctl={ctl} />
       </Canvas>
     </div>
