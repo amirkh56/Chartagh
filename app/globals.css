@@ -2586,17 +2586,101 @@ html.has-cursor textarea {
   font-weight: 600;
   border-bottom: 1.5px solid currentColor;
 }
-.cta__stage {
-  position: relative;
-  height: clamp(300px, 34vw, 440px);
+/* استکان و نعلبکی */
+.tea {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
 }
-.scene,
-.scene > div {
-  position: absolute !important;
-  inset: 0;
+.tea__btn {
+  width: min(360px, 100%);
+  transition: transform 0.5s var(--ease);
 }
-.scene canvas {
-  touch-action: pan-y !important;
+.tea__btn:hover {
+  transform: translateY(-4px);
+}
+.tea__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.tea__shadow {
+  fill: rgba(0, 0, 0, 0.28);
+  filter: blur(6px);
+}
+.tea__saucer {
+  fill: var(--kahgel);
+}
+.tea__rim {
+  fill: none;
+  stroke: var(--sand);
+  stroke-width: 5;
+}
+.tea__band {
+  fill: none;
+  stroke: var(--terracotta);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.tea__dot {
+  fill: var(--brick);
+}
+.tea__dot--b {
+  fill: var(--brick-dark);
+}
+.tea__well {
+  fill: #ead2c6;
+}
+.tea__glass {
+  fill: rgba(255, 255, 255, 0.05);
+  stroke: rgba(255, 250, 245, 0.75);
+  stroke-width: 2.5;
+}
+.tea__surface {
+  fill: #f09a5e;
+}
+.tea__glint {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.tea__lip {
+  fill: none;
+  stroke: var(--sand);
+  stroke-width: 4;
+}
+.tea__gold {
+  stroke: var(--sand);
+  stroke-width: 3;
+}
+.tea__foot {
+  fill: var(--sand);
+}
+.tea__steam {
+  fill: none;
+  stroke: rgba(248, 221, 211, 0.75);
+  stroke-width: 3;
+  stroke-linecap: round;
+  animation: teaSteam 2.6s ease-in-out infinite;
+}
+@keyframes teaSteam {
+  0% {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  45% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    translate: 0 -14px;
+  }
+}
+.tea__caption {
+  font-weight: 600;
+  color: var(--sand);
+  min-height: 1.9em;
 }
 
 /* ============================================================ footer */
@@ -3070,9 +3154,11 @@ html.has-cursor textarea {
   .cta__actions {
     justify-content: center;
   }
-  .cta__stage {
+  .tea {
     order: -1;
-    height: 300px;
+  }
+  .tea__btn {
+    width: min(260px, 80%);
   }
   .contact {
     grid-template-columns: 1fr;

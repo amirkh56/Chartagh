@@ -1,5 +1,5 @@
 'use client';
-import Stage from '../three/Stage';
+import TeaGlass from '../TeaGlass';
 import { Magnetic, Reveal, Words, spot } from '../motion';
 import { Arrow, Pattern } from '../Ornaments';
 import { TransitionLink } from '../Transition';
@@ -32,7 +32,7 @@ export default function Cta() {
             </a>
           </Reveal>
         </div>
-        <Stage className="cta__stage" cursor="کلیک کنید" />
+        <TeaGlass />
       </div>
     </section>
   );
