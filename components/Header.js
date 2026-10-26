@@ -12,7 +12,7 @@ import { fa } from '@/lib/patterns';
 
 export const NAV = [
   { href: '/#services', label: 'خدمات' },
-  { href: '/#work', label: 'نمونه‌کارها' },
+  { href: '/work', label: 'نمونه‌کارها' },
   { href: '/#showcase', label: 'طراحی سایت' },
   { href: '/#process', label: 'فرایند' },
   { href: '/about', label: 'درباره ما' },
@@ -83,7 +83,7 @@ export default function Header() {
                 animate={loaded ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.35 + i * 0.06, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <TransitionLink href={n.href} className={`nav__link ${pathname === n.href ? 'is-active' : ''}`}>
+                <TransitionLink href={n.href} className={`nav__link ${n.href !== '/' && !n.href.includes('#') && pathname.startsWith(n.href) ? 'is-active' : ''}`}>
                   <span className="nav__arch" aria-hidden />
                   <span className="nav__label">{n.label}</span>
                 </TransitionLink>

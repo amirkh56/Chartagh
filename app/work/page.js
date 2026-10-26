@@ -1,24 +1,25 @@
-import { ComingFrames } from '@/components/sections/WorkTeaser';
 import PageHead from '@/components/PageHead';
 import Cta from '@/components/sections/Cta';
+import { CategoryCard, LatestProjects } from '@/components/work/Cards';
+import { CATEGORIES } from '@/lib/work';
 
 export const metadata = { title: 'نمونه‌کارها' };
-
-const CATS = ['همه', 'طراحی سایت', 'طراحی پوستر', 'سئو'];
 
 export default function WorkPage() {
   return (
     <>
-      <PageHead eyebrow="نمونه‌کارها" title="ویترین چارطاق در حال آماده‌شدن است" lead="به‌زودی نمونه‌کارهای ما در این صفحه نمایان می‌شوند. در حال چیدن کاشی‌ها هستیم؛ کمی بعد دوباره سر بزنید." />
-      <section className="container work-page">
-        <ul className="cats" aria-label="دسته‌بندی‌ها (به‌زودی)">
-          {CATS.map((c, i) => (
-            <li key={c} className={i === 0 ? 'is-on' : ''}>
-              {c}
-            </li>
-          ))}
-        </ul>
-        <ComingFrames count={6} big />
+      <PageHead eyebrow="نمونه‌کارها" title="ویترین چارطاق" lead="هر دسته را باز کنید تا پروژه‌های آن را ببینید؛ از فروشگاه‌های اینترنتی تا پوستر و سئو." />
+      <section className="container work-cats" aria-label="دسته‌بندی نمونه‌کارها">
+        {CATEGORIES.map((c, i) => (
+          <CategoryCard key={c.slug} c={c} i={i} />
+        ))}
+      </section>
+      <section className="container work-latest">
+        <header className="sec-head">
+          <p className="eyebrow">تازه‌ترین پروژه‌ها</p>
+          <h2 className="sec-title">آخرین کاشی‌هایی که چیدیم</h2>
+        </header>
+        <LatestProjects />
       </section>
       <Cta />
     </>

@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import 'lenis/dist/lenis.css';
 import './globals.css';
+import './work.css';
 import Providers from '@/components/Providers';
 import Header from '@/components/Header';
 import Footer from '@/components/sections/Footer';

@@ -3,6 +3,7 @@ import { Reveal, Words, Magnetic } from '../motion';
 import { Pattern, Arrow, Icon } from '../Ornaments';
 import { TransitionLink } from '../Transition';
 import { fa } from '@/lib/patterns';
+import { LatestProjects } from '../work/Cards';
 
 const SLOTS = [
   { cat: 'طراحی سایت', icon: 'web', pat: 'herati' },
@@ -50,7 +51,7 @@ export default function WorkTeaser() {
             </h2>
           </div>
           <Reveal className="work__side" delay={0.1}>
-            <p className="sec-lead">به‌زودی نمونه‌کارهای ما در این بخش نمایان می‌شوند. در حال چیدن کاشی‌ها هستیم؛ کمی بعد دوباره سر بزنید.</p>
+            <p className="sec-lead">گزیده‌ای از فروشگاه‌ها و سایت‌هایی که آجر به آجر ساخته‌ایم؛ هر کدام را باز کنید تا جزئیاتش را ببینید.</p>
             <Magnetic strength={0.2}>
               <TransitionLink href="/work" className="link-arrow">
                 همه‌ی نمونه‌کارها <Arrow />
@@ -58,7 +59,7 @@ export default function WorkTeaser() {
             </Magnetic>
           </Reveal>
         </header>
-        <ComingFrames count={3} />
+        <LatestProjects limit={2} />
       </div>
     </section>
   );
