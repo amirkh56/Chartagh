@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useLenis } from 'lenis/react';
 import Logo from './Logo';
 import { Pattern } from './Ornaments';
+import { useLang } from './Lang';
 
 const Ctx = createContext({ go: () => {} });
 const EASE = [0.76, 0, 0.24, 1];
@@ -22,6 +23,7 @@ export function TransitionProvider({ children }) {
   const lenis = useLenis();
   const [phase, setPhase] = useState('idle');
   const pending = useRef(null);
+  const { t } = useLang();
 
   const scrollTo = useCallback(
     (hash, immediate) => {
@@ -79,15 +81,18 @@ export function TransitionProvider({ children }) {
         <Pattern name="boteh" className="curtain__pat" />
         <div className="curtain__center">
           <Logo className="curtain__logo" />
-          <span>لطفاً چند لحظه صبر کنید…</span>
+          <span>{t.curtain}</span>
         </div>
       </motion.div>
     </Ctx.Provider>
   );
 }
 
-export function TransitionLink({ href, onClick, children, ...rest }) {
+// Internal link with the curtain transition; "/x" becomes "/en/x" on English pages unless `raw`.
+export function TransitionLink({ href: to, raw = false, onClick, children, ...rest }) {
   const { go } = useContext(Ctx);
+  const { href: localize } = useLang();
+  const href = raw ? to : localize(to);
   return (
     <Link
       href={href}

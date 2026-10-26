@@ -3,8 +3,11 @@ import TeaGlass from '../TeaGlass';
 import { Magnetic, Reveal, Words, spot } from '../motion';
 import { Arrow, Pattern } from '../Ornaments';
 import { TransitionLink } from '../Transition';
+import { useLang } from '../Lang';
 
 export default function Cta() {
+  const { t } = useLang();
+  const c = t.cta;
   return (
     <section className="cta" {...spot}>
       <Pattern name="boteh" className="cta__pat" />
@@ -12,18 +15,18 @@ export default function Cta() {
       <div className="cta__inner container">
         <div className="cta__copy">
           <Reveal as="p" className="eyebrow eyebrow--light">
-            قدم بعدی با شماست
+            {c.eyebrow}
           </Reveal>
           <h2 className="cta__title">
-            <Words text="یک چای مهمان ما باشید" />
+            <Words text={c.title} />
           </h2>
           <Reveal as="p" className="cta__lead" delay={0.15}>
-            ایده‌تان را بیاورید، چای با ما. در یک گفت‌وگوی بی‌تکلف بررسی می‌کنیم چگونه می‌توان برندتان را درخشان‌تر کرد.
+            {c.lead}
           </Reveal>
           <Reveal className="cta__actions" delay={0.25}>
             <Magnetic>
               <TransitionLink href="/contact" className="btn btn--light">
-                <span>گفت‌وگو را شروع کنیم</span>
+                <span>{c.button}</span>
                 <Arrow />
               </TransitionLink>
             </Magnetic>

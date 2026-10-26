@@ -143,7 +143,7 @@ ol {
 .skip {
   position: fixed;
   top: 10px;
-  right: 10px;
+  inset-inline-start: 10px;
   z-index: 10001;
   padding: 10px 18px;
   border-radius: 99px;
@@ -1800,7 +1800,7 @@ html.has-cursor textarea {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: -22px;
+  inset-inline-start: -22px;
   width: 3px;
   border-radius: 3px;
   background: var(--line);
@@ -2539,7 +2539,8 @@ html.has-cursor textarea {
   color: var(--ink-2);
   font-weight: 300;
   max-width: 70ch;
-  padding: 0 calc(2.4ch + 18px) 24px 0;
+  padding: 0 0 24px;
+  padding-inline-start: calc(2.4ch + 18px);
 }
 
 /* ============================================================ cta */
@@ -2719,7 +2720,10 @@ html.has-cursor textarea {
   gap: 8px;
   align-items: flex-start;
 }
-.footer__col h4 {
+.footer__h {
+  margin: 0 0 6px;
+}
+.footer__col .footer__h {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--sand);
@@ -2783,7 +2787,7 @@ html.has-cursor textarea {
 }
 .page-head .container {
   position: relative;
-  padding-left: clamp(0px, 26vw, 380px);
+  padding-inline-end: clamp(0px, 26vw, 380px);
 }
 .page-head__title {
   font-size: clamp(2.3rem, 1.4rem + 4.2vw, 5.4rem);
@@ -2794,7 +2798,7 @@ html.has-cursor textarea {
 .page-head__sun {
   position: absolute;
   width: clamp(160px, 26vw, 360px);
-  left: 4%;
+  inset-inline-end: 4%;
   top: 120px;
   opacity: 0.9;
 }
@@ -3021,7 +3025,7 @@ html.has-cursor textarea {
   gap: 10px;
   --pat-color: rgba(248, 221, 211, 0.08);
 }
-.info-card h3 {
+.info-card__h {
   position: relative;
   font-size: 1.5rem;
   font-weight: 900;
@@ -3171,7 +3175,7 @@ html.has-cursor textarea {
     align-items: flex-start;
   }
   .page-head .container {
-    padding-left: 0;
+    padding-inline-end: 0;
   }
   .page-head__sun {
     opacity: 0.16;
@@ -3266,7 +3270,7 @@ html.has-cursor textarea {
     border-radius: 26px;
   }
   .qa__a p {
-    padding-right: 0;
+    padding-inline-start: 0;
   }
   .mock__url {
     max-width: 100%;
@@ -3276,6 +3280,148 @@ html.has-cursor textarea {
   }
   .mock__body {
     height: calc(100% - 32px);
+  }
+}
+
+/* ============================================================ English (LTR)
+   Persian is the design's native direction; these rules mirror what logical properties can't. */
+html[lang='en'] body {
+  font-family: var(--font-digits), var(--font-yekan), system-ui, sans-serif;
+  line-height: 1.75;
+}
+html[lang='en'] :is(.hero__title, .sec-title, .page-head__title, .cta__title, .patch__title, .case-head__title) {
+  letter-spacing: -0.015em;
+}
+html[lang='en'] .hero__title {
+  line-height: 1.08;
+}
+html[lang='en'] :is(.sec-title, .page-head__title, .cta__title) {
+  line-height: 1.15;
+}
+[dir='ltr'] .arrow:not(.arrow--up) {
+  scale: -1 1;
+}
+html[lang='en'] .footer__word span {
+  font-size: clamp(3.4rem, 15.5vw, 15rem);
+  letter-spacing: -0.02em;
+}
+[dir='ltr'] .marquee__item {
+  direction: ltr;
+}
+[dir='ltr'] .process__line {
+  scale: -1 1;
+}
+[dir='ltr'] .words__w {
+  transform-origin: 0 100%;
+}
+[dir='ltr'] :is(.pcase__en, .ccat__title small, .case-next__en, .case-head__en) {
+  text-align: left;
+}
+[dir='ltr'] .pcase:hover .pcase__go,
+[dir='ltr'] .ccat:hover .ccat__go {
+  rotate: -45deg;
+}
+
+/* language switcher */
+.lang-switch {
+  display: grid;
+  place-items: center;
+  min-width: 42px;
+  height: 42px;
+  padding: 0 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-weight: 800;
+  font-size: 0.9rem;
+  line-height: 1;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.lang-switch:hover {
+  background: var(--brick);
+  border-color: var(--brick);
+  color: #fff;
+}
+.lang-switch[lang='fa'] {
+  font-family: var(--font-yekan);
+}
+.menu__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.lang-switch--menu {
+  background: transparent;
+  color: var(--kahgel);
+  border-color: rgba(248, 221, 211, 0.4);
+}
+
+/* honeypot field: present for bots, invisible and unreachable for people */
+.hp {
+  position: absolute;
+  inset-inline-start: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* phones in landscape: little height, so go side by side and size visuals from the viewport height */
+@media (max-height: 540px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 88px 0 40px;
+    align-items: center;
+  }
+  .hero__grid {
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+  }
+  .hero__art {
+    order: 0;
+    height: calc(100svh - 110px);
+    max-height: none;
+    width: auto;
+    max-width: 100%;
+    aspect-ratio: 4 / 5;
+    justify-self: center;
+  }
+  .hero__copy {
+    text-align: start;
+  }
+  .hero__lead {
+    margin-inline: 0;
+  }
+  .hero__ctas,
+  .hero__facts {
+    justify-content: flex-start;
+  }
+  .hero__title {
+    font-size: clamp(1.9rem, 1rem + 5vh, 3rem);
+  }
+  .hero__facts {
+    display: none;
+  }
+  .header__band {
+    display: none;
+  }
+  .showcase__inner {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 22px;
+    padding-top: 64px;
+  }
+  .showcase__title {
+    font-size: clamp(1.2rem, 0.8rem + 3vh, 1.7rem);
+  }
+  .showcase__stage {
+    width: min(100%, calc((100svh - 130px) * 1.45));
+    justify-self: center;
+  }
+  .showcase__label {
+    display: none;
+  }
+  .stat {
+    padding-top: 28px;
   }
 }
 

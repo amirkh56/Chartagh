@@ -3,6 +3,7 @@ import { Reveal, Tilt, Words, spot } from '../motion';
 import { Pattern, Arrow, Toranj, Icon } from '../Ornaments';
 import { TransitionLink } from '../Transition';
 import { BOTEH } from '@/lib/patterns';
+import { useLang } from '../Lang';
 
 function WebIllo() {
   return (
@@ -72,62 +73,37 @@ function SeoIllo() {
   );
 }
 
+// text lives in the dictionary (services.items.<id>)
 const SERVICES = [
-  {
-    id: 'web',
-    n: '۰۱',
-    icon: 'web',
-    title: 'طراحی سایت',
-    lead: 'سایتی زیبا، سریع و اثرگذار؛ ویترین آنلاین برند شما.',
-    desc: 'از لندینگ تک‌صفحه‌ای تا فروشگاه اینترنتی و وب‌اپلیکیشن؛ طراحی اختصاصی، انیمیشن‌های نرم و کدنویسی تمیز با ری‌اکت و نکست‌جی‌اس.',
-    tags: ['رابط کاربری', 'فروشگاه', 'لندینگ', 'وب‌اپ'],
-    pattern: 'herati',
-    Illo: WebIllo,
-  },
-  {
-    id: 'poster',
-    n: '۰۲',
-    icon: 'poster',
-    title: 'طراحی پوستر',
-    lead: 'پوسترهایی که از دور دیده می‌شوند و در ذهن می‌مانند.',
-    desc: 'پوستر تبلیغاتی، کاور شبکه‌های اجتماعی، بنر و اعلان؛ با تایپوگرافی فارسی و نقش‌مایه‌های اصیل ایرانی.',
-    tags: ['پوستر', 'شبکه‌های اجتماعی', 'تایپوگرافی', 'بنر'],
-    pattern: 'boteh',
-    Illo: PosterIllo,
-  },
-  {
-    id: 'seo',
-    n: '۰۳',
-    icon: 'seo',
-    title: 'سئو',
-    lead: 'کمک می‌کنیم مشتریان، شما را در گوگل پیدا کنند.',
-    desc: 'سئوی فنی، محتوا، سرعت و ساختار سایت؛ برنامه‌ای گام‌به‌گام برای رسیدن به صفحه‌ی نخست، بدون وعده‌های غیرواقعی.',
-    tags: ['سئوی فنی', 'تولید محتوا', 'سرعت سایت', 'لینک‌سازی'],
-    pattern: 'khatai',
-    Illo: SeoIllo,
-  },
+  { id: 'web', icon: 'web', pattern: 'herati', Illo: WebIllo },
+  { id: 'poster', icon: 'poster', pattern: 'boteh', Illo: PosterIllo },
+  { id: 'seo', icon: 'seo', pattern: 'khatai', Illo: SeoIllo },
 ];
 
 export default function Services() {
+  const { t, n } = useLang();
+  const sv = t.services;
   return (
     <section className="services" id="services">
       <div className="container">
         <header className="sec-head sec-head--row">
           <div>
             <Reveal as="p" className="eyebrow">
-              خدمات ما
+              {sv.eyebrow}
             </Reveal>
             <h2 className="sec-title">
-              <Words text="آنچه برای دیده‌شدن برندتان لازم است" />
+              <Words text={sv.title} />
             </h2>
           </div>
           <Reveal as="p" className="sec-lead" delay={0.15}>
-            سه تخصص، یک تیم؛ مانند چهل‌تکه‌ای که هر تکه‌اش هنری جداست و همه با یک نخ به هم دوخته شده‌اند: برند شما.
+            {sv.lead}
           </Reveal>
         </header>
 
         <div className="patchwork">
-          {SERVICES.map(({ Illo, ...s }, i) => (
+          {SERVICES.map(({ Illo, ...base }, i) => {
+            const s = { ...base, ...sv.items[base.id], n: n(`0${i + 1}`) };
+            return (
             <Reveal key={s.id} className={`patch patch--${s.id}`} delay={i * 0.08}>
               <Tilt className="patch__card" data-cursor={s.title} {...spot}>
                 <Pattern name={s.pattern} className="patch__pat" />
@@ -154,14 +130,15 @@ export default function Services() {
                 </div>
               </Tilt>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
 
         <Reveal className="services__more">
           <Toranj className="services__mini" />
-          <p>هنوز مطمئن نیستید از کدام خدمت شروع کنید؟ در یک گفت‌وگوی کوتاه با هم بررسی می‌کنیم.</p>
+          <p>{sv.more}</p>
           <TransitionLink href="/contact" className="link-arrow">
-            مشاوره‌ی رایگان <Arrow />
+            {sv.moreLink} <Arrow />
           </TransitionLink>
         </Reveal>
       </div>

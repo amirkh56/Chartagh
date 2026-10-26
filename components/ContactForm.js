@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Reveal, Tilt, EASE } from './motion';
 import { Arrow, Pattern, Toranj } from './Ornaments';
-
-const SERVICES = ['طراحی سایت', 'طراحی پوستر', 'سئو', 'هنوز مطمئن نیستم'];
-const BUDGETS = ['کوچک', 'متوسط', 'بزرگ'];
+import { useLang } from './Lang';
 
 function Chips({ name, options, multi, value, onChange }) {
   return (
@@ -30,6 +28,8 @@ function Chips({ name, options, multi, value, onChange }) {
 }
 
 export default function ContactForm() {
+  const { t } = useLang();
+  const c = t.contact;
   const [services, setServices] = useState([]);
   const [budget, setBudget] = useState('');
   const [state, setState] = useState('idle'); // idle | sending | sent
@@ -38,8 +38,9 @@ export default function ContactForm() {
   const submit = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
+    if (data.get('website')) return; // honeypot: bots fill hidden fields, people don't
     if (!String(data.get('name')).trim() || !String(data.get('contact')).trim()) {
-      setError('لطفاً نام و یک راه ارتباطی را وارد کنید.');
+      setError(c.error);
       return;
     }
     setError('');
@@ -56,25 +57,26 @@ export default function ContactForm() {
             <motion.form key="form" className="contact__form" onSubmit={submit} noValidate exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.4 }}>
               <div className="field-row">
                 <label className="field">
-                  <span>نام شما</span>
-                  <input name="name" autoComplete="name" placeholder="نام و نام خانوادگی" />
+                  <span>{c.name}</span>
+                  <input name="name" autoComplete="name" placeholder={c.namePh} maxLength={80} required />
                 </label>
                 <label className="field">
-                  <span>ایمیل یا شماره‌ی تماس</span>
-                  <input name="contact" autoComplete="email" placeholder="برای پاسخ‌گویی به شما" dir="auto" />
+                  <span>{c.reach}</span>
+                  <input name="contact" autoComplete="email" inputMode="email" placeholder={c.reachPh} dir="auto" maxLength={120} required />
                 </label>
               </div>
+              <input className="hp" type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
               <fieldset className="field">
-                <legend>به چه خدمتی نیاز دارید؟</legend>
-                <Chips name="services" options={SERVICES} multi value={services} onChange={setServices} />
+                <legend>{c.need}</legend>
+                <Chips name="services" options={c.needs} multi value={services} onChange={setServices} />
               </fieldset>
               <fieldset className="field">
-                <legend>بودجه‌ی تقریبی پروژه</legend>
-                <Chips name="budget" options={BUDGETS} value={budget} onChange={setBudget} />
+                <legend>{c.budget}</legend>
+                <Chips name="budget" options={c.budgets} value={budget} onChange={setBudget} />
               </fieldset>
               <label className="field">
-                <span>درباره‌ی پروژه بنویسید</span>
-                <textarea name="message" rows={5} placeholder="هدف، مخاطب و هر نکته‌ای که لازم است بدانیم…" />
+                <span>{c.message}</span>
+                <textarea name="message" rows={5} placeholder={c.messagePh} maxLength={2000} />
               </label>
               {error && (
                 <p className="form-error" role="alert">
@@ -82,17 +84,17 @@ export default function ContactForm() {
                 </p>
               )}
               <button className="btn btn--primary btn--block" disabled={state === 'sending'}>
-                <span>{state === 'sending' ? 'در حال ارسال…' : 'ارسال پیام'}</span>
+                <span>{state === 'sending' ? c.sending : c.send}</span>
                 <Arrow />
               </button>
             </motion.form>
           ) : (
             <motion.div key="ok" className="contact__ok" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: EASE }} role="status">
               <Toranj className="contact__ok-sun" />
-              <h2>پیام شما دریافت شد</h2>
-              <p>سپاسگزاریم. در کمتر از یک روز کاری با شما تماس می‌گیریم.</p>
+              <h2>{c.okTitle}</h2>
+              <p>{c.okText}</p>
               <button className="btn btn--ghost" onClick={() => setState('idle')}>
-                <span>ارسال پیام دیگر</span>
+                <span>{c.again}</span>
               </button>
             </motion.div>
           )}
@@ -103,13 +105,13 @@ export default function ContactForm() {
         <Reveal delay={0.1}>
           <Tilt className="info-card">
             <Pattern name="boteh" className="info-card__pat" />
-            <h3>ارتباط مستقیم</h3>
+            <h2 className="info-card__h">{c.direct}</h2>
             <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
-            <p>همکاری با برندها در سراسر ایران، به‌صورت حضوری و آنلاین.</p>
+            <p>{c.directText}</p>
             <ul>
-              <li>شنبه تا چهارشنبه، ۹ صبح تا ۶ عصر</li>
-              <li>پاسخ پیام‌ها: کمتر از یک روز کاری</li>
-              <li>جلسه‌ی آشنایی: رایگان</li>
+              {c.info.map((x) => (
+                <li key={x}>{x}</li>
+              ))}
             </ul>
           </Tilt>
         </Reveal>

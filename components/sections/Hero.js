@@ -6,20 +6,15 @@ import { Pattern, Arrow, StarIcon, Toranj, Icon } from '../Ornaments';
 import { TransitionLink } from '../Transition';
 import { useLoaded } from '../Loader';
 import Logo from '../Logo';
+import { useLang, Rich } from '../Lang';
 
 // glazed-tile service icons floating around the mark; `d` = parallax depth
 const TILES = [
-  { icon: 'web', label: 'طراحی سایت', cls: 't1', d: 34 },
-  { icon: 'poster', label: 'طراحی پوستر', cls: 't2', d: 22 },
-  { icon: 'seo', label: 'سئو', cls: 't3', d: 28 },
-  { icon: 'megaphone', label: 'تبلیغات', cls: 't4', d: 16 },
-  { icon: 'pen', label: 'ایده و طراحی', cls: 't5', d: 40 },
-];
-
-const FACTS = [
-  ['۵+', 'سال تجربه'],
-  ['۳', 'تخصص اصلی'],
-  ['۱۰۰٪', 'همراهی پس از تحویل'],
+  { icon: 'web', cls: 't1', d: 34 },
+  { icon: 'poster', cls: 't2', d: 22 },
+  { icon: 'seo', cls: 't3', d: 28 },
+  { icon: 'megaphone', cls: 't4', d: 16 },
+  { icon: 'pen', cls: 't5', d: 40 },
 ];
 
 function Parallax({ mx, my, depth, className, children, ...rest }) {
@@ -34,6 +29,8 @@ function Parallax({ mx, my, depth, className, children, ...rest }) {
 
 export default function Hero() {
   const loaded = useLoaded();
+  const { t } = useLang();
+  const h = t.hero;
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const yArt = useTransform(scrollYProgress, [0, 1], ['0%', '14%']);
@@ -65,13 +62,13 @@ export default function Hero() {
       <div className="hero__grid container">
         <motion.div className="hero__copy" style={{ y: yCopy, opacity: fade }}>
           <motion.p className="eyebrow" {...show(0.1)}>
-            <StarIcon className="eyebrow__star" /> آژانس تبلیغاتی چارطاق
+            <StarIcon className="eyebrow__star" /> {h.eyebrow}
           </motion.p>
           <h1 className="hero__title">
-            <Words text="برندتان را" animate={loaded} delay={0.15} />
+            <Words text={h.line1} animate={loaded} delay={0.15} />
             <br />
             <span className="hero__accent">
-              <Words text="ماندگار می‌سازیم" animate={loaded} delay={0.35} />
+              <Words text={h.line2} animate={loaded} delay={0.35} />
               <svg className="hero__swash" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden>
                 <motion.path
                   d="M4 16 C 60 4, 120 22, 170 12 S 260 6, 296 14"
@@ -83,23 +80,23 @@ export default function Hero() {
             </span>
           </h1>
           <motion.p className="hero__lead" {...show(0.65)}>
-            چارطاق یک آژانس تبلیغاتی و خلاق است که <b>پنج سال</b> است در <b>طراحی سایت</b>، <b>طراحی پوستر</b> و <b>سئو</b> کنار برندها ایستاده؛ با الهام از هنر ایرانی و نگاهی امروزی.
+            <Rich text={h.lead} />
           </motion.p>
           <motion.div className="hero__ctas" {...show(0.8)}>
             <Magnetic>
               <TransitionLink href="/contact" className="btn btn--primary">
-                <span>شروع همکاری</span>
+                <span>{t.common.start}</span>
                 <Arrow />
               </TransitionLink>
             </Magnetic>
             <Magnetic strength={0.25}>
               <TransitionLink href="/#work" className="btn btn--ghost">
-                <span>مشاهده‌ی نمونه‌کارها</span>
+                <span>{h.secondary}</span>
               </TransitionLink>
             </Magnetic>
           </motion.div>
           <motion.ul className="hero__facts" {...show(0.95)}>
-            {FACTS.map(([v, l]) => (
+            {h.facts.map(([v, l]) => (
               <li key={l}>
                 <b>{v}</b>
                 <span>{l}</span>
@@ -135,24 +132,24 @@ export default function Hero() {
           </Parallax>
 
           <Parallax mx={mx} my={my} depth={10} className="hero__mark">
-            {loaded && <Logo animated className="hero__logo" />}
+            {loaded && <Logo animated className="hero__logo" title={t.common.brand} />}
             <span className="hero__shadow" aria-hidden />
           </Parallax>
 
-          {TILES.map((t, i) => (
-            <Parallax key={t.cls} mx={mx} my={my} depth={t.d} className={`tile ${t.cls}`}>
+          {TILES.map((tile, i) => (
+            <Parallax key={tile.cls} mx={mx} my={my} depth={tile.d} className={`tile ${tile.cls}`}>
               <motion.a
                 href="#services"
                 className="tile__btn"
-                data-cursor={t.label}
+                data-cursor={h.tiles[i]}
                 initial={{ opacity: 0, scale: 0.4, rotate: -20 }}
                 animate={loaded ? { opacity: 1, scale: 1, rotate: 0 } : {}}
                 transition={{ type: 'spring', stiffness: 150, damping: 13, delay: 1 + i * 0.12 }}
                 whileHover={{ scale: 1.12, rotate: -6 }}
-                aria-label={t.label}
+                aria-label={h.tiles[i]}
               >
-                <Icon name={t.icon} />
-                <span className="tile__label">{t.label}</span>
+                <Icon name={tile.icon} />
+                <span className="tile__label">{h.tiles[i]}</span>
               </motion.a>
             </Parallax>
           ))}
@@ -163,7 +160,7 @@ export default function Hero() {
         <span className="hero__scroll-track">
           <i />
         </span>
-        اسکرول کنید
+        {h.scroll}
       </motion.div>
     </section>
   );

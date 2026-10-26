@@ -1,65 +1,63 @@
 'use client';
 import { useLenis } from 'lenis/react';
 import { TransitionLink } from '../Transition';
-import { NAV } from '../Header';
 import Logo from '../Logo';
 import { TileBand, Pattern, Arrow } from '../Ornaments';
 import { spot } from '../motion';
+import { useLang } from '../Lang';
 
-const SOCIAL = [
-  { label: 'اینستاگرام', href: '#' },
-  { label: 'تلگرام', href: '#' },
-  { label: 'لینکدین', href: '#' },
-  { label: 'بیهنس', href: '#' },
-];
+// placeholders until the real profiles exist
+const SOCIAL_HREFS = ['#', '#', '#', '#'];
 
 export default function Footer() {
   const lenis = useLenis();
+  const { t } = useLang();
+  const f = t.footer;
   return (
     <footer className="footer">
       <TileBand className="footer__band" />
       <div className="footer__inner container">
         <div className="footer__top">
           <div className="footer__brand">
-            <Logo className="footer__logo" />
+            <Logo className="footer__logo" title={t.common.brand} />
             <p>
-              چارطاق؛ آژانس تبلیغاتی و خلاق در طراحی سایت، طراحی پوستر و سئو.
+              {f.desc1}
               <br />
-              پنج سال است که با الهام از هنر ایرانی برای برندها می‌سازیم.
+              {f.desc2}
             </p>
           </div>
-          <nav className="footer__col" aria-label="لینک‌های فوتر">
-            <h4>دسترسی سریع</h4>
-            {NAV.map((n) => (
+          <nav className="footer__col" aria-label={f.nav}>
+            <h2 className="footer__h">{f.quick}</h2>
+            {t.nav.map((n) => (
               <TransitionLink key={n.href} href={n.href}>
                 {n.label}
               </TransitionLink>
             ))}
           </nav>
           <div className="footer__col">
-            <h4>شبکه‌های اجتماعی</h4>
-            {SOCIAL.map((s) => (
-              <a key={s.label} href={s.href}>
-                {s.label}
+            <h2 className="footer__h">{f.social}</h2>
+            {f.socials.map((label, i) => (
+              <a key={label} href={SOCIAL_HREFS[i]} rel="noopener noreferrer">
+                {label}
               </a>
             ))}
           </div>
           <div className="footer__col">
-            <h4>ارتباط با ما</h4>
+            <h2 className="footer__h">{f.contact}</h2>
             <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
-            <span>پاسخ‌گویی شنبه تا چهارشنبه</span>
+            <span>{f.hours}</span>
           </div>
         </div>
 
         <div className="footer__word" aria-hidden {...spot}>
           <Pattern name="herati" className="footer__word-pat" />
-          <span>چارطاق</span>
+          <span>{f.word}</span>
         </div>
 
         <div className="footer__bottom">
-          <span>© ۱۴۰۵ چارطاق — آجر به آجر ساخته شده است.</span>
+          <span>{f.copy}</span>
           <button className="to-top" onClick={() => lenis?.scrollTo(0, { duration: 1.6 })}>
-            بازگشت به بالا <Arrow className="arrow--up" />
+            {f.top} <Arrow className="arrow--up" />
           </button>
         </div>
       </div>

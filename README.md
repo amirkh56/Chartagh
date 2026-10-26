@@ -48,6 +48,10 @@ npm install --registry=https://mirror-npm.runflare.com
 
 ### انتشار
 
-سایت کاملاً استاتیکه. روی هر سرویسی که Next.js رو پشتیبانی می‌کنه (Vercel، لیارا، ران‌فلر و…) یا هر سرور Node با `npm run build` و بعد `npm run start` بالا میاد.
+روی هر سرویسی که Next.js رو پشتیبانی می‌کنه (Vercel، لیارا، ران‌فلر و…) یا هر سرور Node با `npm run build` و بعد `npm run start` بالا میاد.
+
+قبل از بیلد، دامنه‌ی واقعی سایت رو در متغیر محیطی `NEXT_PUBLIC_SITE_URL` بذار (پیش‌فرض: `https://chartagh.ir`)؛ لینک‌های canonical، نقشه‌ی سایت و تصویر اشتراک‌گذاری از همین ساخته می‌شن.
+
+نسخه‌ی فارسی روی `/` و نسخه‌ی انگلیسی روی `/en` در دسترسه.
 
 </div>

@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 import { motion, useAnimationFrame, useMotionValue, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion';
 import { StarIcon } from '../Ornaments';
+import { useLang } from '../Lang';
 
 const wrap = (min, max, v) => ((((v - min) % (max - min)) + (max - min)) % (max - min)) + min;
 
@@ -46,10 +47,11 @@ function Row({ items, speed = 2.2, className = '' }) {
 }
 
 export default function Marquee() {
+  const { t } = useLang();
   return (
-    <section className="marquees" aria-label="خدمات ما">
-      <Row className="marquee--brick" items={['طراحی سایت', 'طراحی پوستر', 'سئو', 'طراحی رابط کاربری', 'کاور شبکه‌های اجتماعی', 'بهینه‌سازی سرعت']} />
-      <Row className="marquee--line" speed={-1.6} items={['پنج سال تجربه', 'الهام از هنر ایرانی', 'کاشی به کاشی', 'آجر به آجر', 'پیکسل به پیکسل']} />
+    <section className="marquees" aria-label={t.marquee.aria}>
+      <Row className="marquee--brick" items={t.marquee.a} />
+      <Row className="marquee--line" speed={-1.6} items={t.marquee.b} />
     </section>
   );
 }

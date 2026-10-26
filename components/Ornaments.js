@@ -1,9 +1,17 @@
 import { PATTERNS, starStr, lobedPath, BOTEH, PETAL } from '@/lib/patterns';
 
 // Tiled ornament; color comes from CSS (--pat-color) so it follows day/night.
+// Each pattern's SVG is declared once as a CSS variable (see PatternVars); instances only point at it.
 export function Pattern({ name = 'herati', size, className = '', style }) {
   const p = PATTERNS[name];
-  return <span aria-hidden className={`pat ${className}`} style={{ '--pat-url': p.url, '--pat-size': size || p.size, ...style }} />;
+  return <span aria-hidden className={`pat ${className}`} style={{ '--pat-url': `var(--p-${name})`, '--pat-size': size || p.size, ...style }} />;
+}
+
+export function PatternVars() {
+  const css = `:root{${Object.entries(PATTERNS)
+    .map(([k, v]) => `--p-${k}:${v.url};`)
+    .join('')}}`;
+  return <style dangerouslySetInnerHTML={{ __html: css }} />;
 }
 
 const ring = (n, r, fn) =>

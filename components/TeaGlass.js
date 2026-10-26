@@ -1,14 +1,15 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { useLang } from './Lang';
 
 // استکان کمرباریک on a painted saucer. Each click is one sip; once it's empty it refills.
 const GLASS = 'M104 70C106 120 128 140 130 170C132 200 112 230 112 262L208 262C208 230 188 200 190 170C192 140 214 120 216 70Z';
 const LEVELS = [92, 150, 205, 262]; // y of the tea surface: full → empty
-const CAPTIONS = ['یک جرعه بنوشید', 'گوارای وجود', 'جرعه‌ی آخر…', 'نوش جان!'];
 
 export default function TeaGlass() {
   const [sip, setSip] = useState(0);
+  const { t } = useLang();
   const lift = useAnimationControls();
   const refill = useRef(null);
   const empty = sip === LEVELS.length - 1;
@@ -29,7 +30,7 @@ export default function TeaGlass() {
 
   return (
     <div className="tea">
-      <button className="tea__btn" onClick={drink} data-cursor={empty ? 'دوباره دم می‌کنیم' : 'یک جرعه'} aria-label="نوشیدن یک جرعه چای">
+      <button className="tea__btn" onClick={drink} data-cursor={empty ? t.tea.refill : t.tea.sip} aria-label={t.tea.aria}>
         <svg viewBox="0 0 320 330" className="tea__svg" aria-hidden>
           <defs>
             <clipPath id="tea-glass">
@@ -95,7 +96,7 @@ export default function TeaGlass() {
       </button>
       <AnimatePresence mode="wait">
         <motion.p key={sip} className="tea__caption" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.3 }}>
-          {CAPTIONS[sip]}
+          {t.tea.captions[sip]}
         </motion.p>
       </AnimatePresence>
     </div>

@@ -3,35 +3,29 @@ import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Words, EASE } from '../motion';
 import { Pattern, Toranj } from '../Ornaments';
-import { fa, starStr } from '@/lib/patterns';
-
-const STEPS = [
-  { t: 'طرح اولیه و ایده', d: 'ابتدا با هم گفت‌وگو می‌کنیم و سپس اسکلت سایت را روی کاغذ می‌کشیم؛ ساختار صفحه‌ها از همین‌جا شکل می‌گیرد.' },
-  { t: 'طراحی رابط کاربری', d: 'رنگ، تایپوگرافی و نقش‌مایه؛ هر صفحه را مانند یک کاشی معرق، با حوصله و تکه‌به‌تکه کنار هم می‌چینیم.' },
-  { t: 'جان‌بخشی با انیمیشن', d: 'سایتی زنده که به هر حرکت کاربر واکنشی ظریف و دلنشین نشان می‌دهد.' },
-  { t: 'کدنویسی اصولی', d: 'ری‌اکت و نکست‌جی‌اس؛ سریع، سبک و منظم، با کدی که توسعه‌ی آن در آینده آسان باشد.' },
-  { t: 'انتشار و سئو', d: 'سایت منتشر می‌شود، برای موتورهای جست‌وجو بهینه می‌شود و ما پس از تحویل نیز کنار شما می‌مانیم.' },
-];
+import { starStr } from '@/lib/patterns';
+import { useLang } from '../Lang';
 
 const CODE = [
   ['k', 'export default function Hero() {'],
   ['n', ' '],
   ['p', '  return ('],
   ['t', '    <Taq pattern="herati">'],
-  ['t', '      <Title>خوش آمدید</Title>'],
-  ['t', '      <Button glow>شروع همکاری</Button>'],
+  ['t', '      <Title>{title}</Title>'],
+  ['t', '      <Button glow>{cta}</Button>'],
   ['t', '    </Taq>'],
   ['p', '  );'],
   ['p', '}'],
 ];
 
 const SCORES = [
-  { l: 'سرعت', v: 98 },
-  { l: 'سئو', v: 100 },
-  { l: 'دسترسی', v: 97 },
+  { v: 98 },
+  { v: 100 },
+  { v: 97 },
 ];
 
 function Ring({ v, label, play }) {
+  const { n } = useLang();
   const C = 2 * Math.PI * 26;
   return (
     <div className="score">
@@ -48,13 +42,15 @@ function Ring({ v, label, play }) {
           transition={{ duration: 1.4, ease: EASE, delay: 0.2 }}
         />
       </svg>
-      <b>{fa(v)}</b>
+      <b>{n(v)}</b>
       <span>{label}</span>
     </div>
   );
 }
 
 function Mock({ stage }) {
+  const { t } = useLang();
+  const sc = t.showcase;
   const is = (n) => (stage >= n ? ` is-${n}` : '');
   return (
     <div className={`mock${is(1)}${is(2)}${is(3)}${is(4)}`} data-stage={stage}>
@@ -64,7 +60,7 @@ function Mock({ stage }) {
           <i />
           <i />
         </span>
-        <span className="mock__url" dir="ltr">chartagh.ir/برند-تو</span>
+        <span className="mock__url" dir="ltr">{sc.url}</span>
       </div>
       <div className="mock__body">
         <div className="mock__grid" aria-hidden />
@@ -122,7 +118,7 @@ function Mock({ stage }) {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.35 + i * 0.07 }}
                 >
-                  {s}
+                  {s.replace('{title}', sc.codeTitle).replace('{cta}', sc.codeButton)}
                   {'\n'}
                 </motion.span>
               ))}
@@ -139,11 +135,11 @@ function Mock({ stage }) {
               transition={{ duration: 0.6, ease: EASE }}
             >
               <span className="mk-live">
-                <i /> منتشر شد!
+                <i /> {sc.live}
               </span>
               <div className="mk-scores">
-                {SCORES.map((s) => (
-                  <Ring key={s.l} v={s.v} label={s.l} play />
+                {SCORES.map((s, i) => (
+                  <Ring key={i} v={s.v} label={sc.scores[i]} play />
                 ))}
               </div>
             </motion.div>
@@ -155,6 +151,9 @@ function Mock({ stage }) {
 }
 
 export default function Showcase() {
+  const { t, n } = useLang();
+  const sc = t.showcase;
+  const STEPS = sc.steps;
   const ref = useRef(null);
   const [stage, setStage] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
@@ -174,14 +173,14 @@ export default function Showcase() {
         <Pattern name="herati" className="showcase__pat" />
         <div className="showcase__inner container">
           <div className="showcase__copy">
-            <p className="eyebrow">هنر طراحی سایت؛ تخصص ویژه‌ی ما</p>
+            <p className="eyebrow">{sc.eyebrow}</p>
             <h2 className="sec-title showcase__title">
-              <Words text="یک سایت چگونه از صفر ساخته می‌شود؟" />
+              <Words text={sc.title} />
             </h2>
             <ol className="steps">
               {STEPS.map((s, i) => (
                 <li key={s.t} className={`step ${i === stage ? 'is-active' : ''} ${i < stage ? 'is-done' : ''}`}>
-                  <span className="step__n">{fa(i + 1)}</span>
+                  <span className="step__n">{n(i + 1)}</span>
                   <div>
                     <h3>{s.t}</h3>
                     <AnimatePresence initial={false}>
@@ -207,7 +206,7 @@ export default function Showcase() {
 
           <div
             className="showcase__stage"
-            data-cursor="اسکرول کنید"
+            data-cursor={sc.cursor}
             onPointerMove={(e) => {
               const r = e.currentTarget.getBoundingClientRect();
               tx.set(((e.clientX - r.left) / r.width - 0.5) * 12);
@@ -226,7 +225,7 @@ export default function Showcase() {
             <div className="showcase__label">
               <AnimatePresence mode="wait">
                 <motion.span key={stage} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.35 }}>
-                  مرحله‌ی {fa(stage + 1)} از {fa(STEPS.length)}: {STEPS[stage].t}
+                  {sc.stage.replace('{n}', n(stage + 1)).replace('{total}', n(STEPS.length)).replace('{t}', STEPS[stage].t)}
                 </motion.span>
               </AnimatePresence>
             </div>

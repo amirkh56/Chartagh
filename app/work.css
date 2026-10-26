@@ -316,7 +316,7 @@
 .ccat__n {
   position: absolute;
   top: 22px;
-  right: 30px;
+  inset-inline-start: 30px;
   font-size: 2.6rem;
   font-weight: 100;
   line-height: 1;
@@ -392,7 +392,7 @@
 .ccat__go {
   position: absolute;
   top: 22px;
-  left: 22px;
+  inset-inline-end: 22px;
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -890,7 +890,7 @@
 }
 .case-next__thumb {
   position: absolute;
-  left: 4%;
+  inset-inline-end: 4%;
   top: 50%;
   width: min(380px, 38%);
   border-radius: 14px;
