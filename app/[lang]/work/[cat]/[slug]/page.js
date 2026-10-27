@@ -37,7 +37,7 @@ export default async function ProjectPage({ params }) {
         inLanguage: lang,
         genre: catOf(p.cat)[lang].title,
         creator: { '@id': `${SITE_URL}/#org` },
-        about: { '@type': 'WebSite', name: p.name, url: p.url },
+        about: { '@type': 'WebSite', name: p.name, ...(p.url && { url: p.url }) },
       },
       {
         '@type': 'BreadcrumbList',

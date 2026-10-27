@@ -11,7 +11,15 @@ import { catOf, loc, projectPath, PROJECTS, shot } from '@/lib/work';
 
 const fill = (s, map) => Object.entries(map).reduce((acc, [k, v]) => acc.replace(`{${k}}`, v), s);
 
+// a project not online yet (no url) shows a disabled "coming soon" pill instead of the link
 function Visit({ p, label, light = false }) {
+  const { t } = useLang();
+  if (!p.url)
+    return (
+      <span className={`btn ${light ? 'btn--light' : 'btn--primary'} is-soon`} aria-disabled="true">
+        <span>{t.caseStudy.soon}</span>
+      </span>
+    );
   return (
     <Magnetic>
       <a href={p.url} target="_blank" rel="noopener noreferrer" className={`btn ${light ? 'btn--light' : 'btn--primary'}`}>
@@ -93,9 +101,15 @@ export default function CaseStudy({ p: raw }) {
         </h1>
         <motion.div className="case-head__row" initial={{ opacity: 0, y: 20 }} animate={loaded ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.9, delay: 0.5, ease: EASE }}>
           <Visit p={p} label={cs.visit} />
-          <a href={p.url} target="_blank" rel="noopener noreferrer" className="case-head__domain" dir="ltr">
-            {p.domain} ↗
-          </a>
+          {p.url ? (
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className="case-head__domain" dir="ltr">
+              {p.domain} ↗
+            </a>
+          ) : (
+            <span className="case-head__domain" dir="ltr">
+              {p.domain}
+            </span>
+          )}
         </motion.div>
         <dl className="facts">
           {facts.map(([k, v], i) => (
@@ -233,7 +247,7 @@ export default function CaseStudy({ p: raw }) {
             <div className="case-hero__shot">
               <img src={shot(p, 'desktop-hero')} width="1440" height="900" alt={alt('hero')} loading="lazy" decoding="async" />
               <div className="case-hero__veil">
-                <p>{cs.liveTitle}</p>
+                <p>{p.url ? cs.liveTitle : cs.soonTitle}</p>
                 <Visit p={p} label={cs.visit} light />
               </div>
             </div>

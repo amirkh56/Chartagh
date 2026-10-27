@@ -995,3 +995,7 @@
     height: 44px;
   }
 }
+.btn.is-soon {
+  cursor: default;
+  opacity: 0.85;
+}
