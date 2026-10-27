@@ -22,6 +22,43 @@ function clean($value, int $max): string
     return function_exists('mb_substr') ? mb_substr($s, 0, $max, 'UTF-8') : substr($s, 0, $max * 4);
 }
 
+// Minimal SMTP client (implicit TLS on 465 or STARTTLS on 587) for hosts where mail() is blocked.
+function smtp_send(array $c, string $from, string $to, string $subject, string $body, array $headers): bool
+{
+    $tls = (int) $c['smtp_port'] === 465;
+    $ctx = stream_context_create(['ssl' => ['peer_name' => $c['smtp_host']]]);
+    $s = @stream_socket_client(($tls ? 'ssl://' : 'tcp://') . $c['smtp_host'] . ':' . $c['smtp_port'], $errno, $err, 15, STREAM_CLIENT_CONNECT, $ctx);
+    if (!$s) {
+        return false;
+    }
+    stream_set_timeout($s, 15);
+    $read = function () use ($s): int {
+        $line = '';
+        while (($l = fgets($s, 515)) !== false) {
+            $line = $l;
+            if (!isset($l[3]) || $l[3] !== '-') {
+                break;
+            }
+        }
+        return (int) substr($line, 0, 3);
+    };
+    $cmd = function (string $line, int $want) use ($s, $read): bool {
+        fwrite($s, $line . "\r\n");
+        return $read() === $want;
+    };
+    $ehlo = 'EHLO ' . (gethostname() ?: 'localhost');
+    $data = implode("\r\n", array_merge($headers, ['To: <' . $to . '>', 'Subject: ' . $subject, 'Date: ' . date('r')]))
+        . "\r\n\r\n" . preg_replace('/^\./m', '..', str_replace("\n", "\r\n", $body)) . "\r\n.";
+    $ok = $read() === 220 && $cmd($ehlo, 250)
+        && ($tls || ($cmd('STARTTLS', 220) && stream_socket_enable_crypto($s, true, STREAM_CRYPTO_METHOD_TLS_CLIENT) && $cmd($ehlo, 250)))
+        && $cmd('AUTH LOGIN', 334) && $cmd(base64_encode($c['smtp_user']), 334) && $cmd(base64_encode($c['smtp_pass']), 235)
+        && $cmd('MAIL FROM:<' . $from . '>', 250) && $cmd('RCPT TO:<' . $to . '>', 250)
+        && $cmd('DATA', 354) && $cmd($data, 250);
+    @fwrite($s, "QUIT\r\n");
+    fclose($s);
+    return $ok;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     reply(405, ['ok' => false, 'error' => 'method']);
 }
@@ -99,7 +136,8 @@ $entry = [
 $saved = @file_put_contents($dir . '/messages.jsonl', json_encode($entry, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX) !== false;
 
 // ---- email (user input only ever goes in the body; Reply-To only if it is a valid address)
-$from = $config['from'] !== '' ? $config['from'] : 'no-reply@' . preg_replace('/^www\./', '', $host);
+$smtp = $config['smtp_user'] !== '' && $config['smtp_pass'] !== '';
+$from = $config['from'] !== '' ? $config['from'] : ($smtp ? $config['smtp_user'] : 'no-reply@' . preg_replace('/^www\./', '', $host));
 $subject = '=?UTF-8?B?' . base64_encode('پیام تازه از سایت چارطاق — ' . $name) . '?=';
 $body = "نام: {$name}\nراه ارتباطی: {$contact}\nخدمات: " . implode('، ', $services) . "\nبودجه: {$budget}\nزبان صفحه: {$lang}\n\n{$message}\n";
 $headers = [
@@ -111,7 +149,9 @@ $headers = [
 if (filter_var($contact, FILTER_VALIDATE_EMAIL)) {
     $headers[] = 'Reply-To: ' . $contact;
 }
-$mailed = @mail((string) $config['to'], $subject, $body, implode("\r\n", $headers));
+$mailed = $smtp
+    ? smtp_send($config, $from, (string) $config['to'], $subject, $body, $headers)
+    : @mail((string) $config['to'], $subject, $body, implode("\r\n", $headers));
 
 if (!$mailed && !$saved) {
     reply(500, ['ok' => false, 'error' => 'server']);

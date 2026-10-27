@@ -12,6 +12,13 @@ $defaults = [
     // (an address on your own domain keeps mail out of spam)
     'from' => '',
 
+    // send through a mailbox on the domain (needed when the host blocks mail()).
+    // Leave user/pass empty to use PHP mail(). Port 465 = SSL, 587 = STARTTLS.
+    'smtp_host' => 'mail.chartagh.agency',
+    'smtp_port' => 465,
+    'smtp_user' => '',
+    'smtp_pass' => '',
+
     // every message is also saved here, so nothing is lost if email fails
     'data_dir' => __DIR__ . '/_data',
 
