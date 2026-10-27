@@ -1218,16 +1218,25 @@ html.has-cursor textarea {
   width: 58%;
   left: 21%;
   top: 28%;
-  opacity: 0.92;
+  opacity: 0.3;
   pointer-events: none;
 }
 .hero__mark {
   position: absolute;
-  width: 30%;
-  left: 35%;
-  top: 38.5%;
+  width: 34%;
+  left: 33%;
+  top: 36%;
   z-index: 2;
   pointer-events: none;
+}
+/* a light plate so the logo reads clearly over the ornament */
+.hero__mark::before {
+  content: '';
+  position: absolute;
+  inset: -22% -22% -14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--surface) 58%, transparent 72%);
+  z-index: -1;
 }
 .hero__logo {
   width: 100%;
@@ -1429,8 +1438,8 @@ html.has-cursor textarea {
 }
 .patchwork {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  grid-template-areas: 'web poster' 'web seo';
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas: 'web poster seo';
   gap: 16px;
 }
 .patch--web {
@@ -1450,9 +1459,9 @@ html.has-cursor textarea {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 380px;
-  padding: clamp(22px, 3vw, 36px);
+  gap: 14px;
+  min-height: 0;
+  padding: clamp(20px, 2.4vw, 30px);
   border-radius: var(--radius);
   overflow: hidden;
   color: var(--ink);
@@ -1564,7 +1573,7 @@ html.has-cursor textarea {
 }
 .illo {
   width: 100%;
-  max-width: 320px;
+  max-width: 210px;
   height: auto;
   overflow: visible;
 }
@@ -3447,5 +3456,103 @@ html[lang='en'] .footer__word span {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* ───────────── build timeline (replaces the pinned showcase) ───────────── */
+.tline {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(60px, 8vw, 110px) 0;
+  background: var(--bg-2);
+}
+.tline__list {
+  position: relative;
+  display: grid;
+  gap: clamp(40px, 6vw, 80px);
+  margin-top: clamp(30px, 4vw, 50px);
+  list-style: none;
+}
+.tline__track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 50%;
+  width: 3px;
+  translate: -50% 0;
+  border-radius: 3px;
+  background: var(--line);
+}
+[dir='rtl'] .tline__track {
+  translate: 50% 0;
+}
+.tline__track i {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--brick);
+  transform-origin: top;
+}
+.tline__row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(50px, 8vw, 120px);
+  align-items: center;
+}
+.tline__dot {
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 50%;
+  translate: -50% -50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--brick);
+  color: #fff;
+  font-weight: 800;
+  box-shadow: 0 0 0 6px var(--bg-2);
+}
+[dir='rtl'] .tline__dot {
+  translate: 50% -50%;
+}
+.tline__text h3 {
+  font-size: clamp(1.25rem, 1rem + 1vw, 1.7rem);
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.tline__text p {
+  line-height: 2;
+  opacity: 0.8;
+}
+.tline__row:nth-child(odd of .tline__row) .tline__text {
+  order: 2;
+}
+.tline__media .mock {
+  max-width: 520px;
+  margin-inline: auto;
+}
+@media (max-width: 860px) {
+  .tline__track,
+  .tline__dot {
+    inset-inline-start: 22px;
+  }
+  .tline__row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-inline-start: 64px;
+  }
+  .tline__dot {
+    top: 0;
+    translate: -50% 0;
+  }
+  [dir='rtl'] .tline__dot {
+    translate: 50% 0;
+  }
+  .tline__row:nth-child(odd of .tline__row) .tline__text {
+    order: 0;
   }
 }

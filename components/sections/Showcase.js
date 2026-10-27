@@ -1,6 +1,6 @@
 'use client';
-import { useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 'framer-motion';
+import { useRef } from 'react';
+import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Words, EASE } from '../motion';
 import { Pattern, Toranj } from '../Ornaments';
 import { starStr } from '@/lib/patterns';
@@ -150,87 +150,42 @@ function Mock({ stage }) {
   );
 }
 
+// A line runs down the page as you scroll; each step sits on it with its text on one side
+// and the browser mock at that stage on the other. Nothing pins — the page just scrolls.
 export default function Showcase() {
   const { t, n } = useLang();
   const sc = t.showcase;
-  const STEPS = sc.steps;
   const ref = useRef(null);
-  const [stage, setStage] = useState(0);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
-  useMotionValueEvent(scrollYProgress, 'change', (p) => setStage(Math.min(STEPS.length - 1, Math.floor(p * STEPS.length * 0.999))));
-
-  const rotateX = useSpring(useTransform(scrollYProgress, [0, 0.2], [22, 0]), { stiffness: 80, damping: 20 });
-  const scale = useSpring(useTransform(scrollYProgress, [0, 0.2], [0.88, 1]), { stiffness: 80, damping: 20 });
-  const bar = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
-
-  // mouse tilt on the browser mock
-  const tx = useSpring(0, { stiffness: 120, damping: 16 });
-  const ty = useSpring(0, { stiffness: 120, damping: 16 });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 70%', 'end 70%'] });
+  const grow = useSpring(scrollYProgress, { stiffness: 90, damping: 24 });
 
   return (
-    <section ref={ref} className="showcase" id="showcase">
-      <div className="showcase__sticky">
-        <Pattern name="herati" className="showcase__pat" />
-        <div className="showcase__inner container">
-          <div className="showcase__copy">
-            <p className="eyebrow">{sc.eyebrow}</p>
-            <h2 className="sec-title showcase__title">
-              <Words text={sc.title} />
-            </h2>
-            <ol className="steps">
-              {STEPS.map((s, i) => (
-                <li key={s.t} className={`step ${i === stage ? 'is-active' : ''} ${i < stage ? 'is-done' : ''}`}>
-                  <span className="step__n">{n(i + 1)}</span>
-                  <div>
-                    <h3>{s.t}</h3>
-                    <AnimatePresence initial={false}>
-                      {i === stage && (
-                        <motion.p
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.5, ease: EASE }}
-                        >
-                          {s.d}
-                        </motion.p>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <div className="showcase__bar" aria-hidden>
-              <motion.i style={{ height: bar }} />
-            </div>
-          </div>
-
-          <div
-            className="showcase__stage"
-            data-cursor={sc.cursor}
-            onPointerMove={(e) => {
-              const r = e.currentTarget.getBoundingClientRect();
-              tx.set(((e.clientX - r.left) / r.width - 0.5) * 12);
-              ty.set(((e.clientY - r.top) / r.height - 0.5) * -10);
-            }}
-            onPointerLeave={() => {
-              tx.set(0);
-              ty.set(0);
-            }}
-          >
-            <motion.div className="showcase__tilt" style={{ rotateX, scale }}>
-              <motion.div className="showcase__tilt" style={{ rotateY: tx, rotateX: ty }}>
-                <Mock stage={stage} />
+    <section className="tline" id="showcase">
+      <Pattern name="herati" className="showcase__pat" />
+      <div className="container">
+        <header className="sec-head">
+          <p className="eyebrow">{sc.eyebrow}</p>
+          <h2 className="sec-title">
+            <Words text={sc.title} />
+          </h2>
+        </header>
+        <ol className="tline__list" ref={ref}>
+          <span className="tline__track" aria-hidden>
+            <motion.i style={{ scaleY: grow }} />
+          </span>
+          {sc.steps.map((s, i) => (
+            <li key={s.t} className="tline__row">
+              <span className="tline__dot">{n(i + 1)}</span>
+              <motion.div className="tline__text" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-15% 0px' }} transition={{ duration: 0.7, ease: EASE }}>
+                <h3>{s.t}</h3>
+                <p>{s.d}</p>
               </motion.div>
-            </motion.div>
-            <div className="showcase__label">
-              <AnimatePresence mode="wait">
-                <motion.span key={stage} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.35 }}>
-                  {sc.stage.replace('{n}', n(stage + 1)).replace('{total}', n(STEPS.length)).replace('{t}', STEPS[stage].t)}
-                </motion.span>
-              </AnimatePresence>
-            </div>
-          </div>
-        </div>
+              <motion.div className="tline__media" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-15% 0px' }} transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}>
+                <Mock stage={i} />
+              </motion.div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
