@@ -17,7 +17,7 @@ export default function Cursor() {
   const ry = useSpring(y, { stiffness: 300, damping: 28, mass: 0.5 });
 
   useEffect(() => {
-    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (!window.matchMedia('(pointer: fine)').matches || document.documentElement.dataset.lite) return;
     setOn(true);
     const root = document.documentElement;
     root.classList.add('has-cursor');

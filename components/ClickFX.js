@@ -23,7 +23,7 @@ export default function ClickFX() {
   const ref = useRef(null);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.lite) return;
     const c = ref.current;
     const g = c.getContext('2d');
     const parts = [];

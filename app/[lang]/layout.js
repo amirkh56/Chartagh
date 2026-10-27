@@ -68,7 +68,8 @@ export const viewport = {
 };
 
 // Runs before paint so night mode never flashes. Day is the default.
-const THEME_SCRIPT = `try{document.documentElement.dataset.theme=localStorage.getItem('chartagh-theme')==='night'?'night':'day'}catch(e){}`;
+// weak machines (≤4 cores or ≤4GB) get data-lite: native scroll, no looping animations, no custom cursor
+const THEME_SCRIPT = `try{document.documentElement.dataset.theme=localStorage.getItem('chartagh-theme')==='night'?'night':'day'}catch(e){}try{var n=navigator;if((n.hardwareConcurrency||8)<=4||(n.deviceMemory||8)<=4)document.documentElement.dataset.lite='1'}catch(e){}`;
 
 export default async function RootLayout({ children, params }) {
   const { lang } = await params;
