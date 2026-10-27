@@ -31,7 +31,7 @@ function smtp_send(array $c, string $from, string $to, string $subject, string $
     if (!$s) {
         return false;
     }
-    stream_set_timeout($s, 15);
+    stream_set_timeout($s, 25); // the host scans mail on DATA, sometimes for 10s+
     $read = function () use ($s): int {
         $line = '';
         while (($l = fgets($s, 515)) !== false) {
