@@ -4,7 +4,7 @@
 const isDev = process.env.NODE_ENV !== 'production';
 
 // Persian pages live under /fa internally but are served without the prefix.
-const FA_PAGES = ['/about', '/contact', '/work', '/work/:path*', '/missing', '/opengraph-image'];
+const FA_PAGES = ['/about', '/contact', '/work', '/work/:path*', '/mag', '/mag/:path*', '/missing', '/opengraph-image'];
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
