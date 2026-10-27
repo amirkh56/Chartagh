@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build && node scripts/postbuild.mjs",
+    "pack": "node scripts/pack.mjs",
+    "release": "npm run build && npm run pack"
   },
   "dependencies": {
     "framer-motion": "^14.6.0",

@@ -2,6 +2,10 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ImageResponse } from 'next/og';
 import { LEFT, RIGHT, TOP, CELLS, GAP } from '@/lib/logo';
+import { LANGS } from '@/lib/i18n';
+
+export const dynamic = 'force-static';
+export const generateStaticParams = () => LANGS.map((lang) => ({ lang }));
 
 // Social preview card. Text is Latin on purpose: the OG renderer cannot join Persian letters.
 export const alt = 'Chartagh — creative agency';

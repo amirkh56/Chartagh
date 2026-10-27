@@ -1,6 +1,8 @@
 import { CATEGORIES, PROJECTS, projectPath } from '@/lib/work';
 import { SITE_URL } from '@/lib/i18n';
 
+export const dynamic = 'force-static';
+
 const PATHS = ['/', '/work', '/about', '/contact', ...CATEGORIES.map((c) => `/work/${c.slug}`), ...PROJECTS.map(projectPath)];
 const en = (p) => (p === '/' ? '/en' : `/en${p}`);
 

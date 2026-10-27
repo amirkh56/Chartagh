@@ -28,25 +28,48 @@ function Chips({ name, options, multi, value, onChange }) {
 }
 
 export default function ContactForm() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const c = t.contact;
   const [services, setServices] = useState([]);
   const [budget, setBudget] = useState('');
   const [state, setState] = useState('idle'); // idle | sending | sent
   const [error, setError] = useState('');
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    if (data.get('website')) return; // honeypot: bots fill hidden fields, people don't
     if (!String(data.get('name')).trim() || !String(data.get('contact')).trim()) {
       setError(c.error);
       return;
     }
     setError('');
     setState('sending');
-    // ponytail: no backend yet — wire this to an API route / form service when one exists
-    setTimeout(() => setState('sent'), 1400);
+    // `next dev` has no PHP; the real endpoint is public/api/contact.php on the host
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => setState('sent'), 800);
+      return;
+    }
+    try {
+      const res = await fetch('/api/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          contact: data.get('contact'),
+          message: data.get('message'),
+          website: data.get('website'), // honeypot
+          services,
+          budget,
+          lang,
+        }),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (res.ok && body.ok) return setState('sent');
+      setError(body.error === 'rate' ? c.rate : body.error === 'required' ? c.error : c.failed);
+    } catch {
+      setError(c.failed);
+    }
+    setState('idle');
   };
 
   return (

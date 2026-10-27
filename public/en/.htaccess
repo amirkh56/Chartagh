@@ -1,0 +1,2 @@
+# unknown English addresses get the English 404 page
+ErrorDocument 404 /en/missing.html

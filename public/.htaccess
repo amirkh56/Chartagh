@@ -1,0 +1,102 @@
+# ============================================================
+#  چارطاق — Apache / LiteSpeed config for the static export (cPanel)
+#  Does what a Node server would: clean Persian URLs, /en, 404,
+#  security headers, caching and compression.
+#  The site must sit at the root of the domain's folder (e.g. public_html).
+# ============================================================
+
+Options -Indexes -MultiViews
+DirectorySlash Off
+AddDefaultCharset utf-8
+
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType text/plain .txt
+</IfModule>
+
+# social preview images are generated without an extension
+<FilesMatch "^opengraph-image$">
+  ForceType image/png
+</FilesMatch>
+
+# unknown addresses → styled Persian 404 (en/.htaccess sets the English one)
+ErrorDocument 404 /fa/missing.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1) always HTTPS (skipped on localhost)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # 2) www → bare domain. Remove the # from the next two lines to enable.
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  # 3) a visitor typing /fa/... is sent to the clean address.
+  #    THE_REQUEST is the original request line, so our own internal rewrites never loop.
+  RewriteCond %{THE_REQUEST} \s/fa(/[^\s?]*)?[\s?]
+  RewriteRule ^fa/?(.*)$ /$1 [R=301,L]
+
+  #    ...and so is anyone asking for a raw .html file (/about.html → /about)
+  RewriteCond %{THE_REQUEST} \s/([^\s?]*?)\.html[\s?]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # 4) real files (scripts, images, fonts, robots.txt, sitemap.xml, api/*.php) are served as-is
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 5) home pages
+  RewriteRule ^$ fa.html [L]
+  RewriteRule ^en/?$ en.html [L]
+
+  # 6) English pages: /en/work → en/work.html
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(en/.+?)/?$ $1.html [L]
+
+  # 7) Persian pages and their navigation data live under /fa
+  RewriteCond $1 !^(en|fa|_next|api|shots)(/|$)
+  RewriteCond %{DOCUMENT_ROOT}/fa/$1 -f
+  RewriteRule ^(.+)$ fa/$1 [L]
+
+  RewriteCond $1 !^(en|fa|_next|api|shots)(/|$)
+  RewriteCond %{DOCUMENT_ROOT}/fa/$1.html -f
+  RewriteRule ^(.+?)/?$ fa/$1.html [L]
+</IfModule>
+
+# ------------------------------------------------------------ security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+  # browsers remember to use HTTPS for a year; only keep this once SSL works on the domain
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+
+  # ---------------------------------------------------------- caching
+  # build files have content hashes in their names → cache for a year
+  SetEnvIf Request_URI "^/_next/static/" CH_IMMUTABLE
+  Header set Cache-Control "public, max-age=31536000, immutable" env=CH_IMMUTABLE
+  # portfolio screenshots → a month
+  SetEnvIf Request_URI "^/shots/" CH_MONTH
+  Header set Cache-Control "public, max-age=2592000" env=CH_MONTH
+  # pages and their data must always be fresh after a new upload
+  <FilesMatch "\.(html|txt)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------ compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml application/manifest+json
+</IfModule>
