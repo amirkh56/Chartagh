@@ -121,6 +121,10 @@ canvas {
   display: block;
   max-width: 100%;
 }
+/* keep the width/height attributes as a ratio, not a fixed height, when an image shrinks */
+img {
+  height: auto;
+}
 ul,
 ol {
   margin: 0;
@@ -3065,7 +3069,7 @@ html.has-cursor textarea {
 }
 
 /* ============================================================ responsive */
-@media (max-width: 1180px) {
+@media (max-width: 1260px) {
   .nav {
     display: none;
   }
