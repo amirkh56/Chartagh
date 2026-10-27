@@ -26,7 +26,7 @@
 </div>
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://chartagh.ir
+NEXT_PUBLIC_SITE_URL=https://chartagh.agency
 ```
 
 <div dir="rtl">
@@ -79,7 +79,7 @@ npm run release
 
 ## مرحله‌ی ۵ — تنظیم ایمیل فرم تماس
 
-1. **یک ایمیل روی دامنه بساز:** سی‌پنل ← **Email Accounts** ← Create ← مثلاً `hello@chartagh.ir`. (پیام‌های فرم به این آدرس میان. می‌تونی هر ایمیل دیگه‌ای مثل جیمیل هم بذاری.)
+1. **یک ایمیل روی دامنه بساز:** سی‌پنل ← **Email Accounts** ← Create ← مثلاً `hello@chartagh.agency`. (پیام‌های فرم به این آدرس میان. می‌تونی هر ایمیل دیگه‌ای مثل جیمیل هم بذاری.)
 2. **سلامت ارسال ایمیل:** سی‌پنل ← **Email Deliverability** ← اگه جلوی دامنه هشدار هست، **Repair** رو بزن تا رکوردهای SPF و DKIM درست بشن. این کار باعث می‌شه ایمیل‌ها به اسپم نرن.
 3. **تنظیم مقصد پیام‌ها:** File Manager ← پوشه‌ی `public_html/api` ← **+ File** ← اسم فایل: `config.local.php` ← بعد روی آن راست‌کلیک ← **Edit** و این متن رو بذار:
 
@@ -88,7 +88,7 @@ npm run release
 ```php
 <?php
 return [
-    'to' => 'hello@chartagh.ir',
+    'to' => 'hello@chartagh.agency',
 ];
 ```
 
@@ -117,14 +117,14 @@ return [
 
 | آدرس | انتظار |
 |---|---|
-| `https://chartagh.ir` | صفحه‌ی اصلی فارسی با انیمیشن ورود |
-| `http://chartagh.ir` | خودکار به `https` می‌ره |
-| `https://chartagh.ir/work` و یک نمونه‌کار | صفحه باز می‌شه و اسکرین‌شات‌ها اسکرول می‌شن |
-| `https://chartagh.ir/en` | نسخه‌ی انگلیسی، چپ‌به‌راست |
-| `https://chartagh.ir/fa/about` | خودکار به `/about` می‌ره |
-| `https://chartagh.ir/abcd` | صفحه‌ی ۴۰۴ فارسی چارطاق |
-| `https://chartagh.ir/en/abcd` | صفحه‌ی ۴۰۴ انگلیسی |
-| `https://chartagh.ir/robots.txt` و `/sitemap.xml` | متن و نقشه‌ی سایت نمایش داده می‌شه |
+| `https://chartagh.agency` | صفحه‌ی اصلی فارسی با انیمیشن ورود |
+| `http://chartagh.agency` | خودکار به `https` می‌ره |
+| `https://chartagh.agency/work` و یک نمونه‌کار | صفحه باز می‌شه و اسکرین‌شات‌ها اسکرول می‌شن |
+| `https://chartagh.agency/en` | نسخه‌ی انگلیسی، چپ‌به‌راست |
+| `https://chartagh.agency/fa/about` | خودکار به `/about` می‌ره |
+| `https://chartagh.agency/abcd` | صفحه‌ی ۴۰۴ فارسی چارطاق |
+| `https://chartagh.agency/en/abcd` | صفحه‌ی ۴۰۴ انگلیسی |
+| `https://chartagh.agency/robots.txt` و `/sitemap.xml` | متن و نقشه‌ی سایت نمایش داده می‌شه |
 | فرم تماس | پیام «پیام شما دریافت شد» و ایمیل در صندوق (اسپم رو هم نگاه کن) |
 
 بعد از تست فرم، در File Manager فایل `api/_data/messages.jsonl` باید پیام تست رو داشته باشه؛ یعنی حتی اگه ایمیلی نرسه، پیام‌ها گم نمی‌شن.

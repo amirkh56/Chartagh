@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
           <div className="footer__col">
             <h2 className="footer__h">{f.contact}</h2>
-            <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
+            <a href="mailto:hello@chartagh.agency">hello@chartagh.agency</a>
             <span>{f.hours}</span>
           </div>
         </div>

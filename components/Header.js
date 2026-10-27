@@ -142,7 +142,7 @@ export default function Header() {
               ))}
             </nav>
             <div className="menu__foot container">
-              <span>hello@chartagh.ir</span>
+              <span>hello@chartagh.agency</span>
               <LangSwitch className="lang-switch--menu" />
             </div>
           </motion.div>

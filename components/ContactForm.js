@@ -129,7 +129,7 @@ export default function ContactForm() {
           <Tilt className="info-card">
             <Pattern name="boteh" className="info-card__pat" />
             <h2 className="info-card__h">{c.direct}</h2>
-            <a href="mailto:hello@chartagh.ir">hello@chartagh.ir</a>
+            <a href="mailto:hello@chartagh.agency">hello@chartagh.agency</a>
             <p>{c.directText}</p>
             <ul>
               {c.info.map((x) => (

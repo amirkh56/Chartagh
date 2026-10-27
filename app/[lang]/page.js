@@ -26,7 +26,7 @@ export default async function Home({ params }) {
         url,
         logo: `${SITE_URL}/icon.svg`,
         description: t.meta.description,
-        email: 'hello@chartagh.ir',
+        email: 'hello@chartagh.agency',
         areaServed: ['IR', 'Worldwide'],
         knowsLanguage: ['fa', 'en'],
         foundingDate: '2021',

@@ -6,7 +6,7 @@
 // ============================================================
 $defaults = [
     // where new messages are emailed
-    'to' => 'hello@chartagh.ir',
+    'to' => 'hello@chartagh.agency',
 
     // sender address; empty = no-reply@<your domain>
     // (an address on your own domain keeps mail out of spam)

@@ -30,8 +30,8 @@ export default function Cta() {
                 <Arrow />
               </TransitionLink>
             </Magnetic>
-            <a className="cta__mail" href="mailto:hello@chartagh.ir">
-              hello@chartagh.ir
+            <a className="cta__mail" href="mailto:hello@chartagh.agency">
+              hello@chartagh.agency
             </a>
           </Reveal>
         </div>
