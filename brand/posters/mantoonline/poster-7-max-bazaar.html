@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>چارطاق — دفترچه (مکسیمال)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css"><link rel="stylesheet" href="../ornaments.css">
+<style>
+  /* scrapbook: prints, tape, a torn screenshot, a handwritten note, a rubber stamp */
+  body { background: #efe3d0; color: var(--c-dood); overflow: hidden; }
+  .scrap { position: absolute; top: 1010px; left: -40px; width: 520px; height: 420px; background: #f6ece0; transform: rotate(-6deg); }
+  .scrap .pat { inset: 0; background: var(--c-brick); opacity: .55; }
+  .note { position: absolute; top: 215px; left: 70px; font-size: 92px; color: var(--c-brick); transform: rotate(-6deg); }
+  .label { position: absolute; top: 250px; right: 70px; font-size: 34px; font-weight: 700; text-align: left; }
+  .label small { display: block; font-size: 26px; font-weight: 400; opacity: .7; margin-top: 4px; }
+  .p1 { top: 400px; right: 50px; width: 400px; height: 560px; transform: rotate(4.5deg); }
+  .p2 { top: 690px; left: 46px; width: 360px; height: 470px; transform: rotate(-5.5deg); }
+  .shot { position: absolute; top: 470px; left: 320px; width: 440px; height: 820px; transform: rotate(-1.6deg); filter: drop-shadow(0 16px 16px rgba(40,20,10,.4)); z-index: 4; }
+  .shot div { width: 100%; height: 100%; background: url(mobile-hero.png) top / cover; }
+  .band { position: absolute; top: 1330px; left: -30px; right: -30px; height: 430px; transform: rotate(-2.5deg); z-index: 8; filter: drop-shadow(0 -6px 10px rgba(40,20,10,.25)); }
+  .band > div { width: 100%; height: 100%; background: var(--c-brick); padding: 60px 100px 0; }
+  .word { position: relative; font-size: 230px; font-weight: 900; line-height: 1; color: var(--c-kahgel); }
+  /* slight press misregistration */
+  .word::before { content: attr(data-t); position: absolute; inset: 0; color: var(--c-dood); transform: translate(5px, 4px); mix-blend-mode: multiply; opacity: .55; z-index: -1; }
+  .meta { display: flex; align-items: center; gap: 22px; margin-top: 14px; color: #fff; font-size: 32px; font-weight: 700; }
+  .meta img { width: 70px; height: 80px; }
+  .meta .latin { margin-inline-start: auto; background: var(--c-dood); padding: 10px 26px; border-radius: 6px; transform: rotate(1.5deg); }
+  .stamp { position: absolute; top: 1110px; right: 40px; width: 270px; transform: rotate(-14deg); z-index: 9; mix-blend-mode: multiply; opacity: .88; }
+</style></head>
+<body>
+  <div class="scrap torn" data-depth="18"><div class="pat p-herati"></div></div>
+  <div class="note hand">اینو ببین!</div>
+  <svg class="scribble" style="top:330px;left:150px;width:260px;height:230px" viewBox="0 0 260 230" stroke="#E2492D" stroke-width="7">
+    <path d="M30 20 C 70 60, 120 70, 150 110 S 190 190, 215 205"/><path d="M188 196 L218 208 L214 175"/>
+  </svg>
+  <div class="label">نمونه‌کار تازه<small>فروشگاه اینترنتی مانتو آنلاین</small></div>
+  <svg class="scribble" style="top:345px;right:62px;width:250px;height:30px" viewBox="0 0 250 30" stroke="#E2492D" stroke-width="6"><path d="M5 18 C 60 8, 140 26, 245 10"/></svg>
+
+  <div class="print p1"><div style="background-image:url(photos/p28.jpg)"></div></div>
+  <div class="tape" style="top:385px;right:160px;transform:rotate(-8deg)"></div>
+  <div class="print p2"><div style="background-image:url(photos/p23.jpg)"></div></div>
+  <div class="tape" style="top:680px;left:70px;transform:rotate(-38deg)"></div>
+
+  <div class="shot"><div class="torn" data-depth="16"></div></div>
+  <div class="tape" style="top:450px;left:470px;transform:rotate(3deg);width:200px"></div>
+  <svg class="scribble" style="top:660px;left:330px;width:170px;height:150px" viewBox="0 0 200 170" stroke="#E2492D" stroke-width="6">
+    <path d="M100 18 C 30 14, 8 70, 30 120 S 140 168, 178 112 S 168 20, 84 26"/>
+  </svg>
+
+  <svg class="stamp" viewBox="0 0 200 200">
+    <defs>
+      <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+      <path id="c" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/>
+    </defs>
+    <g filter="url(#ink)" fill="none" stroke="#7E2414">
+      <circle cx="100" cy="100" r="94" stroke-width="6"/><circle cx="100" cy="100" r="56" stroke-width="3"/>
+      <text direction="ltr" font-family="Yekan" font-weight="900" font-size="21" fill="#7E2414" stroke="none"><textPath href="#c">طراحی و توسعه · چارطاق · طراحی سایت ·</textPath></text>
+      <text x="100" y="112" text-anchor="middle" font-family="Yekan" font-weight="900" font-size="34" fill="#7E2414" stroke="none">چارطاق</text>
+    </g>
+  </svg>
+
+  <div class="band"><div class="torn" data-depth="20">
+    <div class="word" data-t="چارطاق">چارطاق</div>
+    <div class="meta"><img src="logo-brick.svg" alt="">طراحی سایت · پوستر · سئو<span class="latin">@chartagh.agency</span></div>
+  </div></div>
+  <div class="grain"></div>
+  <script src="torn.js"></script>
+</body></html>
