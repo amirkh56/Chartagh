@@ -1,0 +1,25 @@
+@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-REGULAR.woff2); font-weight: 400; }
+@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-BOLD.woff2); font-weight: 700; }
+@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-EXTRABLACK.woff2); font-weight: 900; }
+@font-face { font-family: Manrope; src: url(../../../app/fonts/Manrope-latin-wght.woff2); font-weight: 200 800; }
+
+/* client (mantoonline) + chartagh palettes */
+:root {
+  --m-ink: #332821; --m-brown: #5C4A3F; --m-taupe: #8C7562; --m-sand: #D8C5AD; --m-cream: #F8EFE3;
+  --c-brick: #E2492D; --c-mid: #B5391F; --c-dark: #7E2414; --c-kahgel: #F8DDD3; --c-dood: #24130E;
+}
+* { margin: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; }
+body { font-family: Yekan, sans-serif; direction: rtl; position: relative; -webkit-font-smoothing: antialiased; }
+.latin { font-family: Manrope, sans-serif; direction: ltr; unicode-bidi: isolate; }
+
+.url { display: inline-flex; align-items: center; gap: 22px; padding: 18px 22px 18px 40px; border-radius: 999px; font-size: 34px; font-weight: 600; letter-spacing: .5px; }
+.url i { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font-style: normal; }
+.cta { display: inline-flex; align-items: center; gap: 18px; padding: 26px 54px; border-radius: 999px; font-size: 38px; font-weight: 700; }
+
+/* chartagh credit */
+.credit { position: absolute; left: 80px; right: 80px; display: flex; align-items: center; gap: 26px; }
+.credit svg { width: 74px; height: 84px; flex: none; }
+.credit b { display: block; font-size: 32px; font-weight: 900; }
+.credit small { display: block; font-size: 25px; opacity: .75; margin-top: 4px; }
+.credit .handle { margin-inline-start: auto; font-size: 26px; font-weight: 600; opacity: .8; }
