@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>چارطاق — کار کیه؟</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css">
+<style>
+  body { background: #f3dfd3; color: var(--c-dood); overflow: hidden; }
+  .q { position: absolute; top: 230px; right: 70px; font-size: 120px; line-height: 1.05; }
+  .q span { color: var(--c-brick); }
+  .q small { display: block; font-family: 'Aref Ruqaa', serif; font-size: 50px; color: var(--c-dark); margin-top: 10px; transform: rotate(-2deg); }
+  .scr { top: 230px; left: 60px; width: 360px; height: 170px; }
+  .laptop { position: absolute; top: 640px; right: 40px; width: 760px; transform: rotate(1.5deg); }
+  .laptop .scr2 { background: #120b08; border-radius: 22px 22px 0 0; padding: 14px; }
+  .laptop img { width: 100%; display: block; border-radius: 6px; }
+  .laptop .base { height: 24px; margin: 0 -40px; background: linear-gradient(#d8ccc0, #978b80); border-radius: 0 0 22px 22px; }
+  .phone { position: absolute; top: 560px; left: 60px; width: 270px; height: 570px; border-radius: 42px; background: #120b08; padding: 10px; box-shadow: 0 30px 50px rgba(36,19,14,.35); transform: rotate(-5deg); z-index: 3; }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 34px; display: block; }
+  .sheet { position: absolute; top: 1270px; left: -30px; right: -30px; bottom: -30px; transform: rotate(-1.5deg); filter: drop-shadow(0 -8px 12px rgba(36,19,14,.35)); }
+  .sheet > div { width: 100%; height: 100%; background: var(--c-dood); color: var(--c-kahgel); padding: 70px 100px 0; }
+  .ans { font-size: 64px; color: #ffb59f; transform: rotate(-3deg); display: inline-block; }
+  .row { display: flex; align-items: center; gap: 26px; margin-top: 4px; }
+  .row img { width: 130px; height: 148px; }
+  .row b { position: relative; font-size: 190px; font-weight: 900; line-height: 1; color: #fff; }
+  .row b::before { content: attr(data-t); position: absolute; inset: 0; color: var(--c-brick); transform: translate(-6px, 5px); z-index: -1; }
+  .meta { display: flex; gap: 30px; align-items: center; margin-top: 26px; font-size: 32px; font-weight: 700; }
+  .meta .latin { margin-inline-start: auto; background: var(--c-brick); color: #fff; padding: 10px 26px; border-radius: 4px; transform: rotate(1.5deg); }
+  .stamp { position: absolute; top: 1150px; right: 50px; width: 220px; transform: rotate(10deg); mix-blend-mode: multiply; opacity: .85; z-index: 4; }
+</style></head>
+<body>
+  <div class="q lalezar">این سایت <span>کار کیه؟</span><small>فروشگاه اینترنتی مانتو آنلاین</small></div>
+  <div class="laptop"><div class="scr2"><img src="../assets/desktop-hero.png" alt=""></div><div class="base"></div></div>
+  <div class="tape" style="top:620px;right:90px;transform:rotate(14deg)"></div>
+  <div class="phone"><img src="../assets/mobile-hero.png" alt=""></div>
+  <svg class="stamp" viewBox="0 0 200 200">
+    <defs><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+      <path id="c" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+    <g filter="url(#ink)" fill="none" stroke="#7E2414">
+      <circle cx="100" cy="100" r="94" stroke-width="6"/><circle cx="100" cy="100" r="56" stroke-width="3"/>
+      <text direction="ltr" font-family="Yekan" font-weight="900" font-size="24" fill="#7E2414" stroke="none" letter-spacing="1"><textPath href="#c">چارطاق · طراحی سایت · چارطاق ·</textPath></text>
+      <text x="100" y="112" text-anchor="middle" font-family="Yekan" font-weight="900" font-size="34" fill="#7E2414" stroke="none">چارطاق</text>
+    </g>
+  </svg>
+  <div class="sheet"><div class="torn" data-edge="top" data-depth="20">
+    <span class="ans hand">جوابش:</span>
+    <div class="row"><img src="logo-dark.svg" alt=""><b data-t="چارطاق">چارطاق</b></div>
+    <div class="meta"><span>طراحی سایت</span><span>پوستر</span><span>سئو</span><span class="latin">@chartagh.agency</span></div>
+  </div></div>
+  <div class="grain"></div>
+  <script src="torn.js"></script>
+</body></html>

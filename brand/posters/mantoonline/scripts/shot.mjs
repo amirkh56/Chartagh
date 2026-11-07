@@ -1,4 +1,4 @@
-// Fresh hero of mantoonline.com: `node shot.mjs` (desktop 1440x900@2x) or `node shot.mjs mobile` (390x844@3x)
+// Fresh hero of mantoonline.com into assets/: `node scripts/shot.mjs` (desktop 1440x900@2x) or `node scripts/shot.mjs mobile` (390x844@3x)
 const M = process.argv[2] === 'mobile';
 // Dismisses the welcome notice, then waits for the slider to settle before capturing.
 import { spawn } from 'node:child_process';
@@ -27,5 +27,5 @@ const first = (await send('Runtime.evaluate', { expression: active, returnByValu
 for (let i = 0; i < 40; i++) { await sleep(250); if ((await send('Runtime.evaluate', { expression: active, returnByValue: true })).result.value !== first) break; }
 await sleep(2200);
 const { data } = await send('Page.captureScreenshot', { format: 'png' });
-writeFileSync(M ? 'mobile-hero.png' : 'desktop-hero.png', Buffer.from(data, 'base64'));
+writeFileSync(new URL(M ? '../assets/mobile-hero.png' : '../assets/desktop-hero.png', import.meta.url), Buffer.from(data, 'base64'));
 ws.close(); chrome.kill();

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>مانتو آنلاین — پوستر ۱</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css">
+<style>
+  body { background: #efe3d0; color: var(--m-ink); overflow: hidden; }
+  .kicker { position: absolute; top: 185px; left: 0; right: 0; text-align: center; font-size: 60px; color: var(--m-taupe); transform: rotate(-2deg); }
+  h1 { position: absolute; top: 300px; z-index: 1; left: 0; right: 0; text-align: center; font-size: 150px; line-height: 1; color: var(--m-ink); }
+  h1 span { position: relative; display: inline-block; }
+  h1 span::before { content: attr(data-t); position: absolute; inset: 0; color: #c9a98c; transform: translate(5px, 4px); z-index: -1; }
+  .url { position: absolute; top: 500px; left: 50%; transform: translateX(-50%) rotate(-1deg); background: #fbf7ef; color: var(--m-ink); box-shadow: 0 2px 3px rgba(0,0,0,.15), 0 12px 22px -8px rgba(40,20,10,.35); border-radius: 6px; }
+  .url i { background: var(--m-ink); color: var(--m-cream); font-size: 30px; }
+  .phone { position: absolute; top: 640px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 470px; height: 860px; border-radius: 64px; background: #1a1411; padding: 16px; box-shadow: 0 30px 50px rgba(40,20,10,.4); }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 50px; display: block; }
+  .n1 { position: absolute; top: 760px; right: 40px; font-size: 52px; line-height: 1.2; color: var(--c-brick); transform: rotate(6deg); text-align: center; }
+  .n2 { position: absolute; top: 1220px; left: 34px; font-size: 52px; line-height: 1.2; color: var(--c-brick); transform: rotate(-6deg); text-align: center; }
+  .credit { position: absolute; top: 1560px; left: -30px; right: -30px; height: 230px; transform: rotate(-1.5deg); filter: drop-shadow(0 -6px 10px rgba(40,20,10,.25)); }
+  .credit > div { width: 100%; height: 100%; background: var(--c-dood); color: var(--c-kahgel); display: flex; align-items: center; gap: 24px; padding: 0 110px; }
+  .credit img { width: 76px; height: 86px; }
+  .credit b { display: block; font-size: 40px; font-weight: 900; }
+  .credit small { display: block; font-size: 26px; opacity: .8; }
+  .credit .latin { margin-inline-start: auto; font-size: 28px; }
+</style></head>
+<body>
+  <div class="kicker hand">کالکشن پاییز و زمستان</div>
+  <h1 class="lalezar"><span data-t="مانتو آنلاین">مانتو آنلاین</span></h1>
+  <div class="url"><span class="latin">mantoonline.com</span><i>⌕</i></div>
+  <div class="tape" style="top:520px;left:180px;transform:rotate(-12deg);width:120px"></div>
+  <div class="phone"><img src="../assets/mobile-hero.png" alt=""></div>
+  <div class="tape" style="top:625px;left:460px;transform:rotate(4deg)"></div>
+  <div class="n1 hand">ارسال رایگان<br>به همه‌جا!</div>
+  <svg class="scribble" style="top:900px;right:170px;width:160px;height:140px" viewBox="0 0 160 140" stroke="#E2492D" stroke-width="6"><path d="M130 10 C 120 70, 80 110, 20 120"/><path d="M44 102 L18 121 L46 132"/></svg>
+  <div class="n2 hand">پشتیبانی<br>۲۴ ساعته</div>
+  <svg class="scribble" style="top:1170px;left:200px;width:150px;height:110px" viewBox="0 0 150 110" stroke="#E2492D" stroke-width="6"><path d="M10 90 C 60 90, 110 60, 135 15"/><path d="M110 22 L136 12 L138 40"/></svg>
+  <div class="credit"><div class="torn" data-depth="16">
+    <img src="logo-dark.svg" alt="">
+    <div><b>طراحی سایت: چارطاق</b><small>سایت شما هم می‌تواند این‌قدر خوش‌دوخت باشد</small></div>
+    <span class="latin">@chartagh.agency</span>
+  </div></div>
+  <div class="grain"></div>
+  <script src="torn.js"></script>
+</body></html>

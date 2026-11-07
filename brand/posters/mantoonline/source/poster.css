@@ -1,7 +1,7 @@
-@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-REGULAR.woff2); font-weight: 400; }
-@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-BOLD.woff2); font-weight: 700; }
-@font-face { font-family: Yekan; src: url(../../../app/fonts/YekanBakhFaNum-EXTRABLACK.woff2); font-weight: 900; }
-@font-face { font-family: Manrope; src: url(../../../app/fonts/Manrope-latin-wght.woff2); font-weight: 200 800; }
+@font-face { font-family: Yekan; src: url(../../../../app/fonts/YekanBakhFaNum-REGULAR.woff2); font-weight: 400; }
+@font-face { font-family: Yekan; src: url(../../../../app/fonts/YekanBakhFaNum-BOLD.woff2); font-weight: 700; }
+@font-face { font-family: Yekan; src: url(../../../../app/fonts/YekanBakhFaNum-EXTRABLACK.woff2); font-weight: 900; }
+@font-face { font-family: Manrope; src: url(../../../../app/fonts/Manrope-latin-wght.woff2); font-weight: 200 800; }
 
 /* client (mantoonline) + chartagh palettes */
 :root {

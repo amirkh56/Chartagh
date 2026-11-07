@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>مانتو آنلاین — پوستر ۳</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css">
+<style>
+  body { background: #efe3d0; color: var(--m-cream); overflow: hidden; }
+  .photo { position: absolute; inset: 0 0 auto 0; height: 1560px; background: url(../assets/photos/p10.jpg) center 20% / cover; }
+  .photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 50%, rgba(36,19,14,.6) 85%); }
+  .tag { position: absolute; top: 240px; left: 70px; font-size: 54px; color: var(--c-kahgel); transform: rotate(-5deg); text-shadow: 0 2px 10px rgba(0,0,0,.4); }
+  h1 { position: absolute; top: 1010px; right: 70px; font-size: 136px; line-height: 1.02; color: var(--m-cream); }
+  h1 div { position: relative; }
+  h1 div::before { content: attr(data-t); position: absolute; inset: 0; color: var(--c-brick); transform: translate(-5px, 4px); z-index: -1; }
+  .url { position: absolute; top: 1330px; right: 70px; background: #fbf7ef; color: var(--m-ink); font-size: 32px; padding: 12px 34px; border-radius: 4px; transform: rotate(-1.5deg); }
+  .sheet { position: absolute; top: 1460px; left: -20px; right: -20px; bottom: -20px; filter: drop-shadow(0 -8px 12px rgba(0,0,0,.4)); }
+  .sheet > div { width: 100%; height: 100%; background: #f2e6d4; color: var(--c-dood); padding: 70px 90px 0; }
+  .q { font-size: 64px; color: var(--c-brick); transform: rotate(-2deg); display: inline-block; }
+  .row { display: flex; align-items: center; gap: 22px; margin-top: 10px; }
+  .row img { width: 92px; height: 104px; }
+  .row b { font-size: 88px; font-weight: 900; line-height: 1; }
+  .row .latin { margin-inline-start: auto; font-size: 28px; font-weight: 600; }
+  .stamp { position: absolute; top: 1380px; left: 60px; width: 210px; transform: rotate(-12deg); mix-blend-mode: multiply; opacity: .85; z-index: 3; }
+</style></head>
+<body>
+  <div class="photo halftone" style="--x:0"></div>
+  <div class="tag hand">کالکشن پاییز</div>
+  <h1 class="lalezar"><div data-t="این‌قدر شیک،">این‌قدر شیک،</div><div data-t="این‌قدر ساده.">این‌قدر ساده.</div></h1>
+  <div class="url latin">mantoonline.com</div>
+  <div class="sheet"><div class="torn" data-edge="top" data-depth="20">
+    <span class="q hand">این سایت رو کی دوخته؟</span>
+    <div class="row"><img src="logo-light.svg" alt=""><b>چارطاق</b><span class="latin">@chartagh.agency</span></div>
+  </div></div>
+  <div class="tape" style="top:1440px;right:140px;transform:rotate(4deg)"></div>
+  <svg class="stamp" viewBox="0 0 200 200">
+    <defs><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="5"/></filter>
+      <path id="c" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/></defs>
+    <g filter="url(#ink)" fill="none" stroke="#7E2414">
+      <circle cx="100" cy="100" r="94" stroke-width="6"/><circle cx="100" cy="100" r="56" stroke-width="3"/>
+      <text direction="ltr" font-family="Yekan" font-weight="900" font-size="24" fill="#7E2414" stroke="none" letter-spacing="1"><textPath href="#c">چارطاق · طراحی سایت · چارطاق ·</textPath></text>
+      <text x="100" y="112" text-anchor="middle" font-family="Yekan" font-weight="900" font-size="34" fill="#7E2414" stroke="none">چارطاق</text>
+    </g>
+  </svg>
+  <div class="grain"></div>
+  <script src="torn.js"></script>
+</body></html>

@@ -1,7 +1,7 @@
-// Exports the site's Persian ornament library for posters: `node brand/posters/ornaments.mjs`
+// Exports the site's Persian ornament library for posters: `node brand/posters/shared/ornaments.mjs`
 // → ornaments.css (pattern masks, colored with background-color) + shamseh.svg + toranj.svg
 import { writeFileSync } from 'node:fs';
-import { PATTERNS, starStr, lobedPath, PETAL } from '../../lib/patterns.js';
+import { PATTERNS, starStr, lobedPath, PETAL } from '../../../lib/patterns.js';
 
 const out = new URL('.', import.meta.url);
 const css = Object.entries(PATTERNS)

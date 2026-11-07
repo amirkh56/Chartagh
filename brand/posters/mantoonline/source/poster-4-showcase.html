@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>چارطاق — نمونه‌کار مانتو آنلاین</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css">
+<style>
+  /* Chartagh-led: the agency is the headline, the client is the proof */
+  body { background: var(--c-dood); color: var(--c-kahgel); overflow: hidden; }
+  .brand { position: absolute; top: 230px; right: 70px; left: 70px; display: flex; align-items: center; gap: 26px; }
+  .brand img { width: 150px; height: 170px; }
+  .brand b { position: relative; display: block; font-size: 190px; font-weight: 900; line-height: .9; color: #fff; }
+  .brand b::before { content: attr(data-t); position: absolute; inset: 0; color: var(--c-brick); transform: translate(-6px, 5px); z-index: -1; }
+  .brand small { display: block; font-size: 58px; color: var(--c-brick); margin-top: 6px; transform: rotate(-2deg); }
+  .p1 { top: 640px; right: 40px; width: 330px; height: 470px; transform: rotate(6deg); }
+  .p2 { top: 760px; left: 36px; width: 320px; height: 450px; transform: rotate(-6deg); }
+  .phone { position: absolute; top: 580px; left: 50%; transform: translateX(-50%) rotate(-1.5deg); width: 400px; height: 820px; border-radius: 58px; background: #0d0806; padding: 14px; box-shadow: 0 30px 60px rgba(0,0,0,.6); z-index: 3; }
+  .phone img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 46px; display: block; }
+  .label { position: absolute; top: 1440px; left: 0; right: 0; text-align: center; font-size: 32px; font-weight: 700; color: var(--m-sand); }
+  h2 { position: absolute; top: 1500px; left: 0; right: 0; text-align: center; font-size: 76px; color: #fff; }
+  h2 span { color: var(--c-brick); }
+  .stub { position: absolute; top: 1640px; left: 110px; right: 110px; height: 110px; background: var(--c-brick); color: #fff; display: flex; align-items: center; justify-content: center; gap: 22px; font-size: 36px; font-weight: 900; transform: rotate(-1.2deg);
+    -webkit-mask: radial-gradient(circle at 0 50%, transparent 18px, #000 19px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 18px, #000 19px) right / 51% 100% no-repeat; }
+  .grain { opacity: .3; mix-blend-mode: screen; filter: invert(1); }
+</style></head>
+<body>
+  <div class="brand">
+    <img src="logo-dark.svg" alt="">
+    <div><b data-t="چارطاق">چارطاق</b><small class="hand">نمونه‌کار تازه‌مون</small></div>
+  </div>
+  <div class="print p1"><div style="background-image:url(../assets/photos/p28.jpg)"></div></div>
+  <div class="tape" style="top:625px;right:120px;transform:rotate(10deg)"></div>
+  <div class="print p2"><div style="background-image:url(../assets/photos/p23.jpg)"></div></div>
+  <div class="tape" style="top:760px;left:70px;transform:rotate(-30deg);width:140px"></div>
+  <div class="phone"><img src="../assets/mobile-hero.png" alt=""></div>
+  <div class="label">فروشگاه اینترنتی مانتو آنلاین · <span class="latin">mantoonline.com</span></div>
+  <h2 class="lalezar">سایت شما، <span>نمونه‌کار بعدی</span> ما.</h2>
+  <div class="stub">سفارش در دایرکت <span class="latin">@chartagh.agency</span></div>
+  <div class="grain"></div>
+</body></html>

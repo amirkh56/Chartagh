@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fa"><head><meta charset="utf-8"><title>چارطاق — سه طاق</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Lalezar&display=block">
+<link rel="stylesheet" href="poster.css">
+<style>
+  body { background: var(--c-mid); color: var(--c-kahgel); overflow: hidden; }
+  h1 { position: absolute; top: 230px; right: 70px; left: 70px; font-size: 104px; line-height: 1.12; color: #fff; }
+  h1 div { position: relative; }
+  h1 div::before { content: attr(data-t); position: absolute; inset: 0; color: var(--c-dood); transform: translate(-5px, 4px); z-index: -1; opacity: .7; }
+  h1 em { font-style: normal; color: var(--m-sand); }
+  /* three arch-shaped photo cut-outs, pasted slightly off-true */
+  .arches { position: absolute; top: 640px; left: 50px; right: 50px; display: flex; gap: 20px; align-items: flex-end; }
+  .arches .print { position: relative; flex: 1; height: 620px; padding: 12px; border-radius: 999px 999px 10px 10px; }
+  .arches .print div { border-radius: 999px 999px 4px 4px; }
+  .arches .print:nth-child(1) { transform: rotate(-3deg); }
+  .arches .print:nth-child(2) { height: 760px; transform: rotate(1.5deg); }
+  .arches .print:nth-child(3) { transform: rotate(4deg); }
+  .site { position: absolute; top: 1440px; left: 50%; transform: translateX(-50%) rotate(-2deg); background: #fbf7ef; color: var(--c-dood); font-size: 32px; padding: 12px 36px; border-radius: 4px; z-index: 4; }
+  .band { position: absolute; top: 1520px; left: -30px; right: -30px; height: 280px; transform: rotate(-1.5deg); filter: drop-shadow(0 -6px 10px rgba(0,0,0,.3)); }
+  .band > div { width: 100%; height: 100%; background: var(--c-dood); display: flex; align-items: center; gap: 24px; padding: 20px 100px 0; }
+  .band img { width: 110px; height: 124px; }
+  .band b { position: relative; display: block; font-size: 110px; font-weight: 900; line-height: 1; color: #fff; }
+  .band small { display: block; font-size: 30px; margin-top: 6px; }
+  .band .latin { margin-inline-start: auto; font-size: 30px; }
+</style></head>
+<body>
+  <h1 class="lalezar"><div data-t="برای مانتو آنلاین">برای مانتو آنلاین</div><div data-t="سایتی دوختیم">سایتی <em>دوختیم</em></div><div data-t="به قامت برندش.">به قامت برندش.</div></h1>
+  <div class="arches">
+    <div class="print"><div style="background-image:url(../assets/photos/p26.jpg)"></div></div>
+    <div class="print"><div style="background-image:url(../assets/photos/p28.jpg)"></div></div>
+    <div class="print"><div style="background-image:url(../assets/photos/p23.jpg)"></div></div>
+  </div>
+  <div class="tape" style="top:620px;left:470px;transform:rotate(-4deg)"></div>
+  <div class="site latin">mantoonline.com</div>
+  <div class="band"><div class="torn" data-depth="16">
+    <img src="logo-dark.svg" alt="">
+    <div><b>چارطاق</b><small>طراحی سایت · پوستر · سئو</small></div>
+    <span class="latin">@chartagh.agency</span>
+  </div></div>
+  <div class="grain"></div>
+  <script src="torn.js"></script>
+</body></html>
