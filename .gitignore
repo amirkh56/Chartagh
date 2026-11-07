@@ -5,3 +5,7 @@ out
 *.log
 chartagh-site.zip
 .env*.local
+
+# HyperFrames scratch output
+brand/motion/*/.hyperframes/
+brand/motion/*/renders/
