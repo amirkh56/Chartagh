@@ -27,7 +27,7 @@ export default function AboutBody() {
       <div className="values">
         {a.values.map((v, i) => (
           <Reveal key={v.t} delay={i * 0.08}>
-            <Tilt className="value" max={6}>
+            <Tilt className="value">
               <Icon name={ICONS[i]} className="value__icon" />
               <h3>{v.t}</h3>
               <p>{v.d}</p>

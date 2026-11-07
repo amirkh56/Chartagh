@@ -1,10 +1,10 @@
 import Hero from '@/components/sections/Hero';
-import Marquee from '@/components/sections/Marquee';
 import Services from '@/components/sections/Services';
 import WorkTeaser from '@/components/sections/WorkTeaser';
 import Showcase from '@/components/sections/Showcase';
 import Stats from '@/components/sections/Stats';
 import Process from '@/components/sections/Process';
+import Voices from '@/components/sections/Voices';
 import Faq from '@/components/sections/Faq';
 import Cta from '@/components/sections/Cta';
 import { getDict } from '@/lib/dict';
@@ -43,12 +43,12 @@ export default async function Home({ params }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={ldJson(ld)} />
       <Hero />
-      <Marquee />
       <Services />
       <WorkTeaser />
       <Showcase />
       <Stats />
       <Process />
+      <Voices />
       <Faq />
       <Cta />
     </>

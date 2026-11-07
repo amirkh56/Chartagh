@@ -18,10 +18,8 @@ const TILES = [
 ];
 
 function Parallax({ mx, my, depth, className, children, ...rest }) {
-  const x = useTransform(mx, (v) => v * depth);
-  const y = useTransform(my, (v) => v * depth);
   return (
-    <motion.div className={className} style={{ x, y }} {...rest}>
+    <motion.div className={className} {...rest}>
       {children}
     </motion.div>
   );
@@ -89,7 +87,7 @@ export default function Hero() {
                 <Arrow />
               </TransitionLink>
             </Magnetic>
-            <Magnetic strength={0.25}>
+            <Magnetic>
               <TransitionLink href="/#work" className="btn btn--ghost">
                 <span>{h.secondary}</span>
               </TransitionLink>

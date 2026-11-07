@@ -13,8 +13,8 @@ const EASE = [0.76, 0, 0.24, 1];
 
 const CURTAIN = {
   idle: { y: '115%', transition: { duration: 0 } },
-  in: { y: '0%', transition: { duration: 0.75, ease: EASE } },
-  out: { y: '-115%', transition: { duration: 0.85, ease: EASE, delay: 0.2 } },
+  in: { y: '0%', transition: { duration: 0.3, ease: EASE } },
+  out: { y: '-115%', transition: { duration: 0.35, ease: EASE, delay: 0.05 } },
 };
 
 export function TransitionProvider({ children }) {

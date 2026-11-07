@@ -56,7 +56,7 @@ export default function WorkTeaser() {
           </div>
           <Reveal className="work__side" delay={0.1}>
             <p className="sec-lead">{w.lead}</p>
-            <Magnetic strength={0.2}>
+            <Magnetic>
               <TransitionLink href="/work" className="link-arrow">
                 {w.all} <Arrow />
               </TransitionLink>

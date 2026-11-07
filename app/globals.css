@@ -3438,17 +3438,6 @@ html[lang='en'] .footer__word span {
   }
 }
 
-/* weak machines (see the theme script): drop looping/decorative animation and glass blur */
-[data-lite] *,
-[data-lite] *::before,
-[data-lite] *::after {
-  animation: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-[data-lite] .header__bar {
-  background: var(--surface);
-}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -3554,5 +3543,81 @@ html[lang='en'] .footer__word span {
   }
   .tline__row:nth-child(odd of .tline__row) .tline__text {
     order: 0;
+  }
+}
+
+/* no looping or decorative CSS animation; the tea steam and the case-study page scroll stay */
+body *:not(.tea__steam):not(.dev-screen--scroll img),
+body *::before,
+body *::after {
+  animation: none !important;
+}
+
+/* polish */
+h1,
+h2,
+h3,
+blockquote {
+  text-wrap: balance;
+}
+p,
+li {
+  text-wrap: pretty;
+}
+.sec-lead {
+  max-width: 65ch;
+}
+
+/* client voices */
+.voices {
+  padding: clamp(50px, 8vw, 100px) 0;
+}
+.voices__grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 16px;
+}
+.voice {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: clamp(20px, 2.4vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.voice blockquote {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.9;
+}
+.voice figcaption {
+  font-size: 0.9rem;
+  color: var(--accent-text);
+  font-weight: 700;
+}
+.voice--lead {
+  grid-row: span 2;
+  background: var(--brick-dark);
+  border-color: transparent;
+  color: var(--kahgel);
+}
+.voice--lead blockquote {
+  font-size: clamp(1.2rem, 1rem + 1vw, 1.7rem);
+  font-weight: 800;
+}
+.voice--lead figcaption {
+  color: var(--sand);
+}
+.voices__note {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+@media (max-width: 760px) {
+  .voices__grid {
+    grid-template-columns: 1fr;
   }
 }

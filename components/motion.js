@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export const EASE = [0.22, 1, 0.36, 1];
 
-export function Reveal({ children, as = 'div', delay = 0, y = 40, className, ...rest }) {
+export function Reveal({ children, as = 'div', delay = 0, y = 12, className, ...rest }) {
   const M = motion[as] ?? motion.div;
   return (
     <M
@@ -12,7 +12,7 @@ export function Reveal({ children, as = 'div', delay = 0, y = 40, className, ...
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -12% 0px' }}
-      transition={{ duration: 0.9, ease: EASE, delay }}
+      transition={{ duration: 0.45, ease: EASE, delay }}
       {...rest}
     >
       {children}
@@ -21,7 +21,7 @@ export function Reveal({ children, as = 'div', delay = 0, y = 40, className, ...
 }
 
 // Word-by-word rise. Persian letters join, so we split on words only — never characters.
-export function Words({ text, className = '', delay = 0, stagger = 0.06, animate }) {
+export function Words({ text, className = '', delay = 0, stagger = 0.02, animate }) {
   const words = text.split(' ');
   const trigger = animate === undefined ? { whileInView: 'show', viewport: { once: true, margin: '0px 0px -10% 0px' } } : { animate: animate ? 'show' : 'hide' };
   return (
@@ -36,7 +36,7 @@ export function Words({ text, className = '', delay = 0, stagger = 0.06, animate
           <span className="words__mask">
             <motion.span
               className="words__w"
-              variants={{ hide: { y: '115%', rotate: -4 }, show: { y: '0%', rotate: 0, transition: { duration: 0.9, ease: EASE } } }}
+              variants={{ hide: { y: '60%' }, show: { y: '0%', transition: { duration: 0.4, ease: EASE } } }}
             >
               {w}
             </motion.span>
@@ -49,7 +49,7 @@ export function Words({ text, className = '', delay = 0, stagger = 0.06, animate
 }
 
 // Pulls its child toward the cursor a little — classic agency button feel.
-export function Magnetic({ children, strength = 0.35, className = '' }) {
+export function Magnetic({ children, strength = 0, className = '' }) {
   const ref = useRef(null);
   const x = useSpring(0, { stiffness: 220, damping: 16, mass: 0.4 });
   const y = useSpring(0, { stiffness: 220, damping: 16, mass: 0.4 });
@@ -75,7 +75,7 @@ export function Magnetic({ children, strength = 0.35, className = '' }) {
 }
 
 // 3D tilt card; also exposes --gx/--gy for a glare highlight in CSS.
-export function Tilt({ children, className = '', max = 9, ...rest }) {
+export function Tilt({ children, className = '', max = 0, ...rest }) {
   const ref = useRef(null);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);

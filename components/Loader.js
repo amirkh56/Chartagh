@@ -9,7 +9,7 @@ import { useLang } from './Lang';
 export const LoadCtx = createContext({ loaded: true, setLoaded: () => {} });
 export const useLoaded = () => useContext(LoadCtx).loaded;
 
-const DOOR = { duration: 1.1, ease: [0.76, 0, 0.24, 1] };
+const DOOR = { duration: 0.5, ease: [0.76, 0, 0.24, 1] };
 const TILES = 10;
 const SEEN = 'chartagh-intro';
 
@@ -31,7 +31,7 @@ export default function Loader() {
       quick = sessionStorage.getItem(SEEN) === '1';
       sessionStorage.setItem(SEEN, '1');
     } catch {}
-    const minTime = quick ? 250 : 1100;
+    const minTime = quick ? 150 : 500;
 
     let ready = false;
     let raf;
@@ -47,7 +47,7 @@ export default function Loader() {
       const p = Math.min(target, Math.round(100 * (1 - Math.pow(1 - k, 3))));
       setN(p);
       if (p >= 100) {
-        doneTimer = setTimeout(() => setLoaded(true), quick ? 0 : 300);
+        doneTimer = setTimeout(() => setLoaded(true), 0);
         return;
       }
       raf = requestAnimationFrame(tick);

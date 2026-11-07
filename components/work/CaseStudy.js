@@ -78,7 +78,6 @@ export default function CaseStudy({ p: raw }) {
     [cs.facts.industry, p.industry],
     [cs.facts.type, fill(cs.typeOf, { sub: t.work.subs[p.sub] })],
     [cs.facts.market, p.market],
-    [cs.facts.platform, p.platform.join(' · ')],
   ];
   const slices = [0, 22, 44, 66, 100];
 
@@ -181,14 +180,6 @@ export default function CaseStudy({ p: raw }) {
               <span>{cs.font}</span>
               <b>{p.font}</b>
               <em aria-hidden>{cs.sample}</em>
-            </div>
-            <div className="idcard">
-              <span>{cs.platform}</span>
-              <div className="chips-row">
-                {p.platform.map((x) => (
-                  <i key={x}>{x}</i>
-                ))}
-              </div>
             </div>
           </div>
         </Reveal>

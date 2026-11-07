@@ -538,7 +538,7 @@
 }
 .facts {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 44px 0 0;
   border-block: 1px solid var(--line);
 }
@@ -716,7 +716,7 @@
 }
 .idcards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
   margin-top: 18px;
 }
@@ -932,6 +932,9 @@
   }
   .facts {
     grid-template-columns: 1fr 1fr;
+  }
+  .facts__item:last-child {
+    grid-column: 1 / -1;
   }
   .facts__item:nth-child(3) {
     border-inline-start: 0;
