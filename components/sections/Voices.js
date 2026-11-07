@@ -16,15 +16,22 @@ export default function Voices() {
             <Words text={v.title} />
           </h2>
         </header>
-        <div className="voices__grid">
+        <div className="voices__chat">
           {v.items.map((x, i) => (
-            <Reveal as="figure" key={x.who} className={`voice ${i === 0 ? 'voice--lead' : ''}`} delay={i * 0.05}>
-              <blockquote>{x.q}</blockquote>
-              <figcaption>{x.who}</figcaption>
+            <Reveal as="figure" key={x.domain} className="voice" delay={i * 0.05}>
+              <div className="voice__avatar" style={x.logo ? undefined : { background: x.color }} aria-hidden>
+                {x.logo ? <img src={x.logo} alt="" width="54" height="54" loading="lazy" /> : x.mark}
+              </div>
+              <div className="voice__bubble">
+                <p className="voice__head">
+                  {x.project} <span>{x.domain}</span>
+                </p>
+                <p className="voice__who">{x.who}</p>
+                <blockquote>{x.q}</blockquote>
+              </div>
             </Reveal>
           ))}
         </div>
-        <p className="voices__note">{v.note}</p>
       </div>
     </section>
   );
