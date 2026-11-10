@@ -1,0 +1,53 @@
+<!doctype html>
+<!-- Instagram highlight story + cover. Open with #work, #services or #contact; render: sh render.sh -->
+<html lang="fa"><head><meta charset="utf-8"><title>Chartagh highlight</title>
+<style>
+  @font-face { font-family: Peyda; src: url(assets/Peyda-Bold.ttf); font-weight: 700; }
+  @font-face { font-family: Peyda; src: url(assets/Peyda-Black.ttf); font-weight: 900; }
+  @font-face { font-family: Manrope; src: url(assets/Manrope-latin-wght.woff2); font-weight: 200 800; }
+  * { margin: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; }
+  body { background: #100907; color: #fff3ec; font-family: Peyda, sans-serif; direction: rtl; position: relative;
+    background-image: linear-gradient(rgba(248,221,211,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(248,221,211,.05) 1px, transparent 1px);
+    background-size: 90px 90px; }
+  .latin { font-family: Manrope, sans-serif; direction: ltr; unicode-bidi: isolate; }
+  /* cover: Instagram crops the centre square, so the icon disc sits dead centre */
+  .disc { position: absolute; left: 50%; top: 50%; width: 440px; height: 440px; margin: -220px 0 0 -220px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0583a, #e2492d 45%, #b5391f); box-shadow: 0 30px 80px rgba(226,73,45,.35); display: grid; place-items: center; }
+  .disc svg { width: 210px; height: 210px; fill: none; stroke: #fff3ec; stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+  .title { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 120px; font-weight: 900; }
+  .sub { position: absolute; left: 0; right: 0; top: 490px; text-align: center; font-size: 46px; font-weight: 700; color: rgba(248,221,211,.7); }
+  .foot { position: absolute; left: 90px; right: 90px; top: 1290px; text-align: center; font-size: 46px; font-weight: 700; line-height: 1.7; }
+  .foot b { color: #e2492d; }
+  .brand { position: absolute; left: 0; right: 0; bottom: 230px; display: flex; justify-content: center; align-items: center; gap: 18px; font-size: 40px; font-weight: 900; color: rgba(248,221,211,.8); }
+  .brand img { width: 56px; height: 63px; }
+  .phones { position: absolute; left: 0; right: 0; top: 1270px; display: flex; justify-content: center; gap: 26px; }
+  .phones img { width: 230px; height: 330px; object-fit: cover; object-position: top; border-radius: 28px; border: 6px solid #050302; box-shadow: 0 20px 40px rgba(0,0,0,.5); }
+  .phones img:nth-child(2) { transform: translateY(-30px); }
+  [data-k] { display: none; }
+</style></head>
+<body>
+  <!-- WORK -->
+  <div data-k="work">
+    <div class="title">نمونه‌کارها</div>
+    <div class="sub">چندتا از سایت‌هایی که ساختیم</div>
+    <div class="disc"><svg viewBox="0 0 100 100"><rect x="14" y="14" width="30" height="30" rx="6"/><rect x="56" y="14" width="30" height="30" rx="6"/><rect x="14" y="56" width="30" height="30" rx="6"/><rect x="56" y="56" width="30" height="30" rx="6"/></svg></div>
+    <div class="phones"><img src="assets/zhoan-m.png" alt=""><img src="assets/manto-m.png" alt=""><img src="assets/amiri-m.png" alt=""></div>
+  </div>
+  <!-- SERVICES -->
+  <div data-k="services">
+    <div class="title">خدمات</div>
+    <div class="sub">هر چی برای دیده‌شدن لازمه</div>
+    <div class="disc"><svg viewBox="0 0 100 100"><path d="M50 12 L88 32 L50 52 L12 32 Z"/><path d="M12 50 L50 70 L88 50"/><path d="M12 68 L50 88 L88 68"/></svg></div>
+    <div class="foot"><b>طراحی سایت</b> · فروشگاهی، شرکتی، اختصاصی<br><b>طراحی پوستر</b> · استوری، پست، تبلیغ<br><b>سئو</b> · که تو گوگل پیدات کنن</div>
+  </div>
+  <!-- CONTACT -->
+  <div data-k="contact">
+    <div class="title">بیا حرف بزنیم</div>
+    <div class="sub">دایرکت همیشه بازه</div>
+    <div class="disc"><svg viewBox="0 0 100 100"><path d="M18 22 h64 a8 8 0 0 1 8 8 v34 a8 8 0 0 1 -8 8 H44 L26 86 V72 h-8 a8 8 0 0 1 -8 -8 V30 a8 8 0 0 1 8 -8 Z"/><path d="M30 42 h40 M30 54 h26"/></svg></div>
+    <div class="foot"><span class="latin">chartagh.agency</span><br><span class="latin">chartagh.agency@gmail.com</span><br><span class="latin">0921 252 3673</span></div>
+  </div>
+  <div class="brand"><img src="assets/logo-dark.svg" alt="">چارطاق</div>
+  <script>const k = location.hash.slice(1) || 'work'; document.querySelector(`[data-k="${k}"]`).style.display = 'block';</script>
+</body></html>
