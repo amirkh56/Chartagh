@@ -135,6 +135,22 @@ $entry = [
 ];
 $saved = @file_put_contents($dir . '/messages.jsonl', json_encode($entry, JSON_UNESCAPED_UNICODE) . "\n", FILE_APPEND | LOCK_EX) !== false;
 
+// ---- Telegram notify (Cloudflare Worker; api.telegram.org itself may be unreachable from the host)
+$notified = false;
+if ($config['notify_url'] !== '' && function_exists('curl_init')) {
+    $ch = curl_init((string) $config['notify_url']);
+    curl_setopt_array($ch, [
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($entry, JSON_UNESCAPED_UNICODE),
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Authorization: Bearer ' . $config['notify_secret']],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 8,
+    ]);
+    curl_exec($ch);
+    $notified = curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;
+    curl_close($ch);
+}
+
 // ---- email (user input only ever goes in the body; Reply-To only if it is a valid address)
 $smtp = $config['smtp_user'] !== '' && $config['smtp_pass'] !== '';
 $from = $config['from'] !== '' ? $config['from'] : ($smtp ? $config['smtp_user'] : 'no-reply@' . preg_replace('/^www\./', '', $host));
@@ -153,7 +169,7 @@ $mailed = $smtp
     ? smtp_send($config, $from, (string) $config['to'], $subject, $body, $headers)
     : @mail((string) $config['to'], $subject, $body, implode("\r\n", $headers));
 
-if (!$mailed && !$saved) {
+if (!$mailed && !$saved && !$notified) {
     reply(500, ['ok' => false, 'error' => 'server']);
 }
-reply(200, ['ok' => true, 'mailed' => $mailed]);
+reply(200, ['ok' => true, 'mailed' => $mailed, 'notified' => $notified]);

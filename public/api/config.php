@@ -6,7 +6,7 @@
 // ============================================================
 $defaults = [
     // where new messages are emailed
-    'to' => 'hello@chartagh.agency',
+    'to' => 'chartagh.agency@gmail.com',
 
     // sender address; empty = no-reply@<your domain>
     // (an address on your own domain keeps mail out of spam)
@@ -21,6 +21,10 @@ $defaults = [
 
     // every message is also saved here, so nothing is lost if email fails
     'data_dir' => __DIR__ . '/_data',
+
+    // Telegram notify bot (Cloudflare Worker, see telegram-bot/README.md). Empty = off.
+    'notify_url' => '',     // e.g. https://chartagh-notify-bot.<you>.workers.dev/notify
+    'notify_secret' => '',
 
     // messages allowed per visitor per hour
     'max_per_hour' => 5,
