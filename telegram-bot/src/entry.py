@@ -41,10 +41,15 @@ class Default(WorkerEntrypoint):
                 return Response("forbidden", status=403)
             entry = json.loads(await request.text())
             chats = [c.strip() for c in str(self.env.CHAT_IDS).split(",") if c.strip()]
+            sent = 0
             async with Bot(self.env.BOT_TOKEN) as bot:
                 for chat in chats:
-                    await bot.send_message(chat, format_entry(entry), parse_mode="HTML")
-            return Response.json({"ok": True, "sent": len(chats)})
+                    try:  # one bad chat (bot removed from a group) must not block the rest
+                        await bot.send_message(chat, format_entry(entry), parse_mode="HTML")
+                        sent += 1
+                    except Exception as err:
+                        print(f"send to {chat} failed: {err}")
+            return Response.json({"ok": sent > 0, "sent": sent}, status=200 if sent else 502)
 
         if path == "telegram":
             secret = request.headers.get("X-Telegram-Bot-Api-Secret-Token") or ""
