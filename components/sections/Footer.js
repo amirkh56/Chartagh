@@ -5,9 +5,7 @@ import Logo from '../Logo';
 import { TileBand, Pattern, Arrow } from '../Ornaments';
 import { spot } from '../motion';
 import { useLang } from '../Lang';
-
-// placeholders until the real profiles exist
-const SOCIAL_HREFS = ['#', '#', '#', '#'];
+import ContactLinks from '../ContactLinks';
 
 export default function Footer() {
   const lenis = useLenis();
@@ -35,16 +33,8 @@ export default function Footer() {
             ))}
           </nav>
           <div className="footer__col">
-            <h2 className="footer__h">{f.social}</h2>
-            {f.socials.map((label, i) => (
-              <a key={label} href={SOCIAL_HREFS[i]} rel="noopener noreferrer">
-                {label}
-              </a>
-            ))}
-          </div>
-          <div className="footer__col">
             <h2 className="footer__h">{f.contact}</h2>
-            <a href="mailto:hello@chartagh.agency">hello@chartagh.agency</a>
+            <ContactLinks />
             <span>{f.hours}</span>
           </div>
         </div>

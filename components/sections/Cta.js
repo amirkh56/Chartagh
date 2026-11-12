@@ -4,6 +4,7 @@ import { Magnetic, Reveal, Words, spot } from '../motion';
 import { Arrow, Pattern } from '../Ornaments';
 import { TransitionLink } from '../Transition';
 import { useLang } from '../Lang';
+import ContactLinks from '../ContactLinks';
 
 export default function Cta() {
   const { t } = useLang();
@@ -30,9 +31,7 @@ export default function Cta() {
                 <Arrow />
               </TransitionLink>
             </Magnetic>
-            <a className="cta__mail" href="mailto:hello@chartagh.agency">
-              hello@chartagh.agency
-            </a>
+            <ContactLinks className="clinks--row" />
           </Reveal>
         </div>
         <TeaGlass />

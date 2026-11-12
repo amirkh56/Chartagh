@@ -10,6 +10,7 @@ import { Pattern, Toranj, TileBand, Arrow } from './Ornaments';
 import { useLoaded } from './Loader';
 import { useLang } from './Lang';
 import { switchPath } from '@/lib/i18n';
+import { EMAIL } from './ContactLinks';
 
 const EASE = [0.76, 0, 0.24, 1];
 
@@ -142,7 +143,7 @@ export default function Header() {
               ))}
             </nav>
             <div className="menu__foot container">
-              <span>hello@chartagh.agency</span>
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               <LangSwitch className="lang-switch--menu" />
             </div>
           </motion.div>
