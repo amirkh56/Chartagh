@@ -1,0 +1,7 @@
+{
+  "name": "chartagh-notify-bot",
+  "main": "src/entry.py",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["python_workers"]
+  // secrets (wrangler secret put): BOT_TOKEN, NOTIFY_SECRET, CHAT_IDS
+}
